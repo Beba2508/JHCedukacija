@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irundo HC Koordinator — Dan 2</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#1a1a2e;--text:#2c3e50;--text-sec:#6b7c8d;--text-light:#9aacbb;--border:#eaeef2;--bg:#fff;--bg-soft:#f7f8fa;--accent:#c8a96e;--accent-dark:#a88c55;--red:#d94f5c}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);z-index:100}
+  .site-header-logo{height:26px}
+  .site-header-nav{display:flex;align-items:center;gap:28px}
+  .site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}
+  .site-header-nav a:hover{color:var(--text)}
+  .day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2026/01/nerolika_main_A3988-1-scaled.jpg') center/cover no-repeat;position:relative}
+  .hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
+  .hero{padding:40px 48px 32px}
+  .hero-inner{max-width:880px;margin:0 auto}
+  .hero-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:20px;padding:6px 16px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;line-height:1.2;color:var(--dark);margin-bottom:14px}
+  .hero h1 span{color:var(--red)}
+  .hero .sub{font-size:1.02rem;color:var(--text-sec);max-width:580px;line-height:1.7}
+  .progress-bar{background:var(--bg-soft);border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:0 48px}
+  .progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:14px 0;overflow-x:auto}
+  .progress-day{display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .progress-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+  .progress-dot.done{background:#2ecc71;color:#fff}
+  .progress-dot.active{background:var(--red);color:#fff}
+  .progress-dot.inactive{background:#e8edf2;color:var(--text-light)}
+  .progress-line{width:16px;height:2px;background:#dde3e8;flex-shrink:0}
+  .progress-label{font-size:.68rem;color:var(--text-light);margin-left:2px;font-weight:500}
+  .progress-label.done{color:#2ecc71;font-weight:600}
+  .progress-label.active{color:var(--red);font-weight:600}
+  .main{max-width:880px;margin:0 auto;padding:48px 40px 80px}
+  .day-header{display:flex;align-items:center;gap:20px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+  .day-number{width:60px;height:60px;border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg-soft)}
+  .day-number .label{font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light)}
+  .day-number .num{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--dark)}
+  .day-meta h2{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--dark);margin-bottom:3px}
+  .day-meta p{color:var(--text-sec);font-size:.9rem}
+  .section{margin-bottom:48px}
+  .section-label{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px}
+  .section-label::before{content:'';width:16px;height:2px;background:var(--accent)}
+  .section h3{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--dark);margin-bottom:18px;line-height:1.3}
+  .section>p{color:var(--text-sec);font-size:.9rem;margin-bottom:16px}
+  .card{background:var(--bg);border-radius:12px;padding:26px 28px;margin-bottom:14px;border:1px solid var(--border);transition:all .2s}
+  .card:hover{border-color:#d0d8e0;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+  .card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h4 .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .card p,.card li{color:var(--text-sec);font-size:.88rem;line-height:1.7}
+  .card ul{list-style:none;padding:0}
+  .card ul li{padding:4px 0 4px 20px;position:relative}
+  .card ul li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:600;font-size:.85rem}
+  .tip-box{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .tip-box p{font-size:.84rem;color:var(--text-sec);font-style:italic}
+  .tip-box strong{color:var(--text)}
+  .info-box{background:#f0f7ff;border-left:3px solid #3498db;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .info-box p{font-size:.84rem;color:#1a4a6b}
+  .info-box strong{color:#0a3a5b}
+  .warning-box{background:#fff8f0;border-left:3px solid #e67e22;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .warning-box p{font-size:.84rem;color:#8a5a1e}
+  .warning-box strong{color:#6b4200}
+  /* Timeline */
+  .timeline{position:relative;padding-left:0}
+  .timeline-block{display:flex;gap:0;margin-bottom:6px}
+  .timeline-left{width:52px;flex-shrink:0;text-align:right;padding-right:12px;padding-top:12px}
+  .timeline-time{font-size:.72rem;font-weight:700;color:var(--text-light)}
+  .timeline-rail{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:20px}
+  .timeline-dot{width:12px;height:12px;border-radius:50%;margin-top:14px;flex-shrink:0}
+  .timeline-connector{width:2px;flex:1;min-height:20px}
+  .td-red{background:var(--red)}.tc-red{background:rgba(217,79,92,.2)}
+  .td-blue{background:#3498db}.tc-blue{background:rgba(52,152,219,.2)}
+  .td-green{background:#2ecc71}.tc-green{background:rgba(46,204,113,.2)}
+  .td-orange{background:#e67e22}.tc-orange{background:rgba(230,126,34,.2)}
+  .td-purple{background:#8e44ad}.tc-purple{background:rgba(142,68,173,.2)}
+  .td-pink{background:#e84393}.tc-pink{background:rgba(232,67,147,.2)}
+  .td-teal{background:#1abc9c}.tc-teal{background:rgba(26,188,156,.2)}
+  .td-navy{background:var(--dark)}
+  .timeline-content{flex:1;padding:6px 0 6px 12px}
+  .timeline-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px 18px;transition:all .2s}
+  .timeline-card:hover{border-color:#d0d8e0;box-shadow:0 2px 12px rgba(0,0,0,.04)}
+  .timeline-card h4{font-size:.84rem;font-weight:700;margin-bottom:4px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .timeline-card p{font-size:.78rem;color:var(--text-sec);margin:0;line-height:1.5}
+  .color-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.62rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#fff}
+  .tag-red{background:var(--red)}.tag-blue{background:#3498db}.tag-green{background:#2ecc71}.tag-orange{background:#e67e22}.tag-purple{background:#8e44ad}.tag-pink{background:#e84393}.tag-teal{background:#1abc9c}
+  /* Steps */
+  .steps{margin-top:8px}
+  .step{display:flex;gap:14px;align-items:flex-start}
+  .step-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;z-index:1}
+  .step-connector{width:2px;height:14px;background:#e0e0e0}
+  .step-text{font-size:.84rem;color:var(--text-sec);padding:4px 0 4px;flex:1;line-height:1.6}
+  .step-text strong{color:var(--text)}
+  /* Tables */
+  .template-table,.cleaning-table{width:100%;border-collapse:collapse;margin:16px 0;background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:.84rem}
+  .template-table thead,.cleaning-table thead{background:var(--dark);color:#fff}
+  .template-table th,.cleaning-table th{padding:10px 14px;text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+  .template-table td,.cleaning-table td{padding:10px 14px;color:var(--text-sec);border-bottom:1px solid #f0f0f0}
+  .template-table tr:last-child td,.cleaning-table tr:last-child td{border-bottom:none}
+  .template-table tr:hover td,.cleaning-table tr:hover td{background:var(--bg-soft)}
+  .template-table code{background:#f0f4f8;padding:2px 6px;border-radius:4px;font-size:.78rem;color:var(--red)}
+  /* Checklist */
+  .checklist{background:var(--bg);border-radius:12px;padding:28px;border:1px solid var(--border);margin-top:28px}
+  .checklist h4{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:18px}
+  .checklist-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
+  .checklist-item:last-child{border-bottom:none}
+  .checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
+  .checklist-item label{font-size:.86rem;color:var(--text-sec);cursor:pointer;flex:1}
+  .checklist-item input:checked+label{text-decoration:line-through;color:var(--text-light)}
+  /* Footer */
+  .footer{background:var(--dark);color:rgba(255,255,255,.4);padding:40px 48px;font-size:.78rem}
+  .footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  .footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
+  .footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.timeline-left{width:40px}.template-table,.cleaning-table{font-size:.78rem}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
+  @media print{.site-header,.progress-bar{display:none}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo">
+  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 2 od 7</span></nav>
+</header>
+<div class="hero-image"></div>
+<section class="hero"><div class="hero-inner">
+  <div class="hero-badge">Dan 2</div>
+  <h1>Svakodnevni workflow<br><span>09:00 – 21:00</span></h1>
+  <p class="sub">Danas upoznaješ kompletni dnevni raspored HC koordinatora. Cilj je proći Google kalendar, razumjeti što koji zadatak znači i s mentorom vidjeti kako se svaki zadatak radi.</p>
+</div></section>
+<nav class="progress-bar"><div class="progress-inner">
+  <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Uvod</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot active">2</div><span class="progress-label active">Workflow</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">3</div><span class="progress-label">Hospitality</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">4</div><span class="progress-label">Housek. & Facility</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">5</div><span class="progress-label">Ville</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">6</div><span class="progress-label">Praksa</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">7</div><span class="progress-label">Simulacija</span></div>
+</div></nav>
+
+<main class="main">
+  <div class="day-header"><div class="day-number"><span class="label">Dan</span><span class="num">2</span></div><div class="day-meta"><h2>Svakodnevni workflow</h2><p>Google kalendar, dnevni zadaci, komunikacija, kodovi, čišćenje, eVisitor</p></div></div>
+
+  <!-- 2.1 WORKFLOW -->
+  <div class="section">
+    <div class="section-label">Modul 2.1</div>
+    <h3>📅 Dnevni raspored — Google Calendar</h3>
+    <p>Svi dnevni zadaci organizirani su u <strong>Google kalendaru</strong> kao ponavljajući eventi. Svaki zadatak ima svoje vrijeme i boju. Kad završiš zadatak — desni klik → promijeni boju u <strong>crnu</strong> (= odrađeno).</p>
+    <p>Poanta ovog dana je da zajedno s mentorom <strong>prođeš kalendar</strong>, shvatiš što koji zadatak znači, i da mentor pokaže kako se svaki zadatak radi. Kroz sljedeće dane ćeš ih detaljno učiti i postupno preuzimati samostalno.</p>
+
+    <div class="info-box">
+      <p><strong>ℹ️ Napomena o kalendaru:</strong> Osim ponavljajućih zadataka, u kalendaru će se pojavljivati i <strong>jednokratni eventi</strong> (non-repeating) koji služe kao reminderi za nešto specifično toga dana. Postupak je isti — kad odradiš, označi crnom bojom. Kad ti netko iz HC tima kaže <em>"daj mi stavi reminder"</em> — to znači da ubaciš <strong>all-day event</strong> s tom napomenom na datum kad treba.</p>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">09:00</span></div><div class="timeline-rail"><div class="timeline-dot td-blue"></div><div class="timeline-connector tc-blue"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-blue">Messages</span> Messages — WA, Booking, Airbnb, Mail</h4><p>Otvoriti sve komunikacijske kanale i odgovoriti na sve pristigle poruke od gostiju i kolega.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">10:00</span></div><div class="timeline-rail"><div class="timeline-dot td-purple"></div><div class="timeline-connector tc-purple"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-purple">Arena</span> Arena — provjera dolazaka, šifri, upisivanje</h4><p>Provjera svih dolazaka za Arena polikliniku, validacija šifri za ulaz i upis u sustav.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">10:30</span></div><div class="timeline-rail"><div class="timeline-dot td-pink"></div><div class="timeline-connector tc-pink"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-pink">Dolasci</span> Arrivals, Codes, Cards</h4><p>Priprema tablice dolazaka, generiranje kodova za ulazak, aktivacija kartica (ZD2) — detalji u nastavku.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">10:30</span></div><div class="timeline-rail"><div class="timeline-dot td-green"></div><div class="timeline-connector tc-green"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-green">Narudžbe</span> CLEAN24 narudžba</h4><p>Narudžba posteljine za sutrašnje smjene (odlasci/dolasci).</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">11:15</span></div><div class="timeline-rail"><div class="timeline-dot td-teal"></div><div class="timeline-connector tc-teal"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-teal">Posteljina</span> Provjera posteljine</h4><p>Provjera statusa i logistike posteljine prema rasporedu destinacija.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">11:15</span></div><div class="timeline-rail"><div class="timeline-dot td-orange"></div><div class="timeline-connector tc-orange"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-orange">Teren</span> Supervisor / teren</h4><p>Supervizorska kontrola apartmana — provjera čistoće, funkcionalnosti, urednosti.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">12:15</span></div><div class="timeline-rail"><div class="timeline-dot td-red"></div><div class="timeline-connector tc-red"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-red">Check-out</span> Check out messages</h4><p>Slanje check-out poruka za sve destinacije (Zagreb, Rovinj+CRA, Dubrovnik, Sunny) — detalji u nastavku.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">13:00</span></div><div class="timeline-rail"><div class="timeline-dot td-blue"></div><div class="timeline-connector tc-blue"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-blue">Reminder</span> Reminder poruke + Payment linkovi</h4><p>Priprema reminder poruka za sutrašnje dolaske, kreiranje payment linkova za dodatne usluge.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">14:00</span></div><div class="timeline-rail"><div class="timeline-dot td-green"></div><div class="timeline-connector tc-green"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-green">Self</span> Self — slanje kodova (u 15:00!)</h4><p>Priprema kodova za self check-in. <strong>Kodovi se šalju točno u 15:00</strong> ili ranije ako čistačice jave da je apartman spreman.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">15:00</span></div><div class="timeline-rail"><div class="timeline-dot td-purple"></div><div class="timeline-connector tc-purple"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-purple">Računi</span> Izrada računa za rezervacije na odlasku</h4><p>Izrada računa za rezervacije koje odlaze — fiskalizacija i evidencija.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">16:00</span></div><div class="timeline-rail"><div class="timeline-dot td-pink"></div><div class="timeline-connector tc-pink"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-pink">Priprema</span> Google Sheet za sutrašnje dolaske</h4><p>Priprema tablice dolazaka za sutrašnji dan — unos svih rezervacija iz Rentlia u Google Sheet.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">17:15</span></div><div class="timeline-rail"><div class="timeline-dot td-teal"></div><div class="timeline-connector tc-teal"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-teal">Provjera</span> Check-in messages / Code check up</h4><p>Provjera da su svi gosti dobili kodove i da su kodovi ispravni — check-in poruke.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">18:00</span></div><div class="timeline-rail"><div class="timeline-dot td-purple"></div><div class="timeline-connector tc-purple"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-purple">Arena</span> Arena — večernja provjera</h4><p>Ponovna provjera dolazaka, šifri i upisivanja za Arena polikliniku.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">18:30</span></div><div class="timeline-rail"><div class="timeline-dot td-orange"></div><div class="timeline-connector tc-orange"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-orange">Invoices</span> Stay invoices check</h4><p>Provjera računa za boravak (Stay invoices) za Sunny i Irundo.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">19:00</span></div><div class="timeline-rail"><div class="timeline-dot td-purple"></div><div class="timeline-connector tc-purple"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-purple">Arena</span> Prijava Arena gostiju</h4><p>Prijava gostiju Arena poliklinike u sustav.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">19:30</span></div><div class="timeline-rail"><div class="timeline-dot td-red"></div><div class="timeline-connector tc-red"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-red">Late arrivals</span> Late arrival templates + recheck codes</h4><p>Slanje Late Arrival poruka gostima koji kasno dolaze. Ponovno provjeravanje svih kodova.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">20:15</span></div><div class="timeline-rail"><div class="timeline-dot td-green"></div><div class="timeline-connector tc-green"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag tag-green">Čišćenje</span> Raspored čišćenja</h4><p>Priprema i slanje rasporeda čišćenja za sutra u WhatsApp grupe.</p></div></div></div>
+
+      <div class="timeline-block"><div class="timeline-left"><span class="timeline-time">21:00</span></div><div class="timeline-rail"><div class="timeline-dot td-navy"></div></div><div class="timeline-content"><div class="timeline-card"><h4><span class="color-tag" style="background:#2c3e50;">eVisitor</span> eVisitor click</h4><p>Završna prijava svih gostiju u eVisitor sustav.</p></div></div></div>
+
+    </div>
+  </div>
+
+  <!-- 2.2 MESSAGES -->
+  <div class="section">
+    <div class="section-label">Modul 2.2</div>
+    <h3>📱 Messages — WA, Booking, Airbnb, Mail</h3>
+    <p>Prvo što napraviš ujutro: otvoriš sve komunikacijske kanale i odgovoriš na sve pristigle poruke.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#3498db;">💬</span> Postupak</h4>
+      <ul><li>Otvoriti WhatsApp — pregledati sve poruke od gostiju i kolega, odgovoriti na sve upite</li><li>Otvoriti mailove (Gmail) — pregledati i odgovoriti</li><li>Otvoriti Extranete: <strong>Booking.com</strong>, <strong>Airbnb</strong>, <strong>Expedia</strong> — provjeriti nove poruke i zahtjeve</li><li>Login podaci za sve platforme nalaze se u Nuclinu pod "ACCOUNTS - ŠIFRE"</li></ul>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fde8e8;color:var(--red);">⚡</span> Reply score — brzina odgovora</h4>
+      <p>Na <strong>Airbnb</strong> i <strong>Booking.com</strong> vrijedi isto pravilo:</p>
+      <ul><li><strong>Odgovor u roku 1 sata</strong> ili u najkraćem mogućem roku</li><li>Sve poruke se odgovaraju putem same platforme (ne mailom!)</li><li><strong>Naša poruka uvijek mora biti zadnja</strong> u razgovoru</li><li>PreApproval zahtjeve odobriti u najkraćem roku (max 24h)</li></ul>
+    </div>
+    <div class="info-box"><p><strong>ℹ️ Booking.com specifičnost:</strong> Moguće je odgovaranje i putem Pulse aplikacije na mobitelu, putem gmail poruke iz extraneta, ili slanjem maila na enkriptiranu email adresu.</p></div>
+  </div>
+
+  <!-- 2.3 CHECK-OUT -->
+  <div class="section">
+    <div class="section-label">Modul 2.3</div>
+    <h3>🚪 Check-out poruke</h3>
+    <p>Check-out poruke šalju se za <strong>sve destinacije</strong> (Zagreb, Rovinj + CRA, Dubrovnik, Sunny). Šalju se za sutrašnje odlaske.</p>
+    <div class="card"><h4><span class="icon" style="background:#fde8e8;color:#c0392b;">📤</span> Postupak korak po korak</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>Rentlio aplikaciju na mobitelu</strong></div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">U izborniku odabrati <strong>Kokpit</strong> → otvoriti popis <strong>sutrašnjih odlazaka</strong></div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Na rezervaciji napraviti <strong>swipe udesno</strong> → prikazat će se opcija "Poruka" s template-ima</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">Odabrati pravi template: <code>CO KB</code> (keybox apartmani) ili <code>CO KOD</code> (touchscreen/keypad apartmani)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div></div><div class="step-text">Kliknuti WhatsApp ikonu za slanje. Ako gost nema WA → SMS + kanal rezervacije (Booking/Airbnb/Expedia)</div></div>
+      </div>
+    </div>
+    <div class="warning-box"><p><strong>⚠️ Ne šalju se</strong> poruke za apartmane koji imaju check-out s hostom — njima komunikacija ide osobno.</p></div>
+    <div class="tip-box"><p><strong>💡 CRA napomena:</strong> CRA account se nalazi u dupliciranoj Rentlio aplikaciji jer standardna aplikacija šteka kada ima puno dolazaka.</p></div>
+  </div>
+
+  <!-- 2.4 REMINDER -->
+  <div class="section">
+    <div class="section-label">Modul 2.4</div>
+    <h3>📨 Reminder poruke + Payment linkovi</h3>
+    <p>Reminder poruke šalju se <strong>dan prije dolaska</strong> gosta. Ako postoje dodatne naplate (parking, pet fee), kreiraju se i payment linkovi.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#3498db;">📋</span> Postupak korak po korak</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>Rentlio Kokpit</strong> → kliknuti na <strong>današnje dolaske</strong>. Pregledati napomene za parking, pet fee itd.</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Ako ima dodatnu naplatu → kreirati <strong>Worldline payment link</strong> i zalijepiti ga u napomenu rezervacije</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Otvoriti Rentlio na mobitelu → Kokpit → <strong>sutrašnji dolasci</strong>. Swipe udesno → "Poruka"</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">Odabrati pravi template (vidi tablicu ispod)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div><div class="step-text">Poslati putem WhatsAppa. Ako nema WA → SMS + kanal rezervacije</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">6</div></div><div class="step-text">U <strong>napomenu rezervacije</strong> upisati kanal slanja: WA, SMS, MAIL, AIRBNB, BCOM...</div></div>
+      </div>
+    </div>
+    <table class="template-table"><thead><tr><th>Template</th><th>Kada koristiti</th><th>Posebne radnje</th></tr></thead><tbody>
+      <tr><td><code>REM</code></td><td>Gost ulazi kodom, <strong>nema</strong> dodatnih naplata</td><td>Pod "Check-in instructions:" dodati kraticu apartmana (npr. ZP6)</td></tr>
+      <tr><td><code>REM EXTRA CHARGES</code></td><td>Gost ulazi kodom, <strong>ima</strong> dodatne naplate</td><td>Zamijeniti BORGUN s payment linkom + dodati kraticu apartmana</td></tr>
+      <tr><td><code>XX HOST</code></td><td>Naš host osobno dočekuje gosta</td><td>XX = ime hosta (Daniela, Deana, Zuzana...)</td></tr>
+      <tr><td><code>BLEND</code></td><td>Gost je rezervirao <strong>danas za danas/sutra</strong></td><td>Pod "Check-in instructions:" dodati kraticu apartmana</td></tr>
+    </tbody></table>
+  </div>
+
+  <!-- 2.5 SELF KODOVI -->
+  <div class="section">
+    <div class="section-label">Modul 2.5</div>
+    <h3>🔑 Self — slanje kodova za ulazak</h3>
+    <p>Slanje self check-in poruke s kodom za ulazak. Ovo je jedan od najvažnijih zadataka jer gost bez koda ne može ući u apartman!</p>
+    <div class="warning-box"><p><strong>⚠️ KLJUČNO PRAVILO:</strong> Kodovi se <strong>nikada ne šalju unaprijed</strong>. Točno u <strong>15:00 na dan dolaska</strong> gost dobiva poruku s kodom — ili ranije ako čistačice jave da je apartman spreman.</p></div>
+    <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">🔐</span> Postupak korak po korak</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>Rentlio na mobitelu</strong> → danas datumi dolazaka</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text"><strong>Swipe udesno</strong> na rezervaciji → "Poruka" → odaberi pravi template prema tipu ulaska</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Klikni <strong>WhatsApp ikonu</strong> (ili SMS/extranet ako nema WA)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">U <strong>Nuclinu</strong> prema imenu apartmana pronađi odgovarajuće šifre za ulazak</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div></div><div class="step-text">U templateu pod "Check in instructions" dodaj <strong>kraticu apartmana</strong> (npr. ZP6, ZD2)</div></div>
+      </div>
+    </div>
+    <table class="template-table"><thead><tr><th>Tip ulaska</th><th>Template</th><th>Napomena</th></tr></thead><tbody>
+      <tr><td><strong>Keybox</strong></td><td>Keybox template</td><td>Gosti koriste samo keybox (unutra ključevi za zgradu/apt)</td></tr>
+      <tr><td><strong>Keybox + Touchscreen</strong></td><td>Keybox + Touchscreen</td><td>⚠️ Dva različita koda — pripazi kod slanja!</td></tr>
+      <tr><td><strong>Keypad</strong></td><td>Keypad template</td><td>Ulazak šifrom na tipkovnici</td></tr>
+      <tr><td><strong>Keypad + Keybox</strong></td><td>Keypad + Keybox</td><td>⚠️ Dva različita koda (keypad za zgradu, keybox za apt)</td></tr>
+      <tr><td><strong>Keypad + Touchscreen</strong></td><td>Keypad + Touchscreen</td><td>⚠️ Dva različita koda</td></tr>
+    </tbody></table>
+  </div>
+
+  <!-- 2.6 CHECK-IN -->
+  <div class="section">
+    <div class="section-label">Modul 2.6</div>
+    <h3>✅ Check-in poruke / Code check up</h3>
+    <p>Check-in poruke služe za potvrdu da je gost dobio <strong>točan kod</strong> i da vidimo dolazi li kasno (iza 21:00). Ovim postupkom provjeravamo sinkronizaciju kodova u Rentliu i Nuclinu.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">🔍</span> Postupak korak po korak</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>Rentlio na mobitelu</strong> → Kokpit → današnji dolasci</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Za svaki dolazak provjeriti: je li kod poslan i odgovara li kod u <strong>Rentliu</strong> kodu u <strong>Nuclinu</strong></div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div></div><div class="step-text">Ako gost još nije potvrdio dolazak → poslati <strong>check-in poruku</strong> s pitanjem "Are you still arriving today?"</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2.7 ARRIVALS TABLE -->
+  <div class="section">
+    <div class="section-label">Modul 2.7</div>
+    <h3>📊 Tablica dolazaka (Google Sheet)</h3>
+    <p>Tablica dolazaka je centralni pregled za svaki dan. Sadrži sve informacije o dolascima, kodovima i statusima. Stupci tablice:</p>
+    <div class="card"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">📋</span> Stupci tablice</h4>
+      <ul>
+        <li><strong>GRAD</strong> — oznaka grada (ZG, RV, DBV, SN...)</li><li><strong>APT</strong> — kratica apartmana</li><li><strong>DONE</strong> — ✓ kad je sve odrađeno za tog gosta</li><li><strong>EVIS</strong> — ✓ kad je gost prijavljen u eVisitor</li><li><strong>SELF</strong> — ✓ kad je self kod poslan gostu</li><li><strong>MESSAGING</strong> — kanal komunikacije (WA, SMS, BCOM...)</li><li><strong>C/I</strong> — check-in status</li><li><strong>CHECK</strong> — provjera kodova</li><li><strong>UŠLI</strong> — ✓ kad gost potvrdi ulazak</li><li><strong>SUPERVISOR</strong> — supervizorska provjera</li><li><strong>NAPOMENA</strong> — posebne napomene</li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:14px;"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">⏰</span> Proces rada s tablicom</h4>
+      <ul><li><strong>Dan prije dolaska:</strong> Provjeriti sve dolaske u Rentliu i unijeti u tablicu. Pripremiti sve potrebno.</li><li><strong>Na dan dolaska:</strong> Ažurirati statuse DONE, EVIS, SELF, CHECK, UŠLI. Kasni dolasci (KD) automatski se označavaju žutom — u 20:00 Late Arrival template.</li><li><strong>Nakon dolaska:</strong> Kad gosti potvrde ulazak → UŠLI ✓. Dodati napomene ako treba.</li></ul>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#f0e8fd;color:#8e44ad;">💳</span> Codes / Cards — posebne aktivacije</h4>
+      <p>Na nekim lokacijama uz standardne kodove koristimo i posebne sustave:</p>
+      <ul><li><strong>ZD2:</strong> Kodovi se ažuriraju automatski kroz Pinlock sustav. Potrebno je ručno aktivirati keypad bravu — označiti datum dolaska/odlaska i vrijeme otkad vrijedi šifra. Upisati šifru i kliknuti da stiže obavijest kad gost uđe.</li></ul>
+    </div>
+  </div>
+
+  <!-- 2.8 CLEANING -->
+  <div class="section">
+    <div class="section-label">Modul 2.8</div>
+    <h3>🧹 Priprema i slanje rasporeda čišćenja</h3>
+    <p>Svaka destinacija ima svoje pravilo kad i što se šalje u WhatsApp grupu čistačicama.</p>
+    <table class="cleaning-table"><thead><tr><th>Destinacija</th><th>Rok slanja</th><th>Što se šalje</th></tr></thead><tbody>
+      <tr><td><strong>Sunny</strong></td><td>Do 17:00 najkasnije</td><td>Raspored za sutra i prekosutra (dolasci + odlasci)</td></tr>
+      <tr><td><strong>Villas</strong></td><td>Nedjeljom</td><td>Raspored za iduća 2 tjedna (automatski generiran)</td></tr>
+      <tr><td><strong>Sve ostalo</strong></td><td>Do 21:00 najkasnije</td><td>Raspored samo za sutra</td></tr>
+    </tbody></table>
+    <div class="card" style="margin-top:14px;"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">📋</span> Postupak slanja</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>link za rasporede</strong>: beba2508.github.io/rasporedi/</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Odabrati lokaciju (Sunny, Villas) — raspored se automatski učita s dolascima i odlascima</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Urediti tekst: izbrisati zagrade; za Sunny <strong>obavezno ostaviti pax i broj noćenja</strong></div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">Provjeriti posebne slučajeve — npr. ako je apt 2+2 a dolazi 4 osobe → dodati napomenu "Pripremiti sofu"</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div><div class="step-text">U <strong>Rentliu provjeriti</strong>: jesu li svi dolasci/odlasci ispravni, ima li posebnih napomena</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">6</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>WhatsApp</strong> → pronaći odgovarajuću housekeeping grupu</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">7</div></div><div class="step-text">Poslati raspored u pravom formatu (primjer ispod)</div></div>
+      </div>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#f0f4f8;color:var(--text);">💬</span> Primjer poruke na WhatsAppu</h4>
+      <div style="background:#1a2e1a;color:#d4edda;padding:18px 22px;border-radius:10px;font-family:monospace;font-size:.82rem;line-height:1.8;margin-top:8px;">RASPORED ZA SUTRA 27.10.2025.<br><br>DOLASCI:<br>WG1 – 2pax, 3 noćenja<br>WG2 – 4pax, 2 noćenja<br><br>ODLASCI:<br>CzeG29_3_2 room 1<br>WG4</div>
+      <ul style="margin-top:12px;"><li>Uvijek koristi <strong>točan datum</strong> u naslovu poruke</li><li>Dodaj kratku napomenu ako treba (npr. "Molim da pripreme sofu u WG2.")</li><li>Za <strong>Mugebu</strong> dodati i broj od gosta u raspored</li><li>Nakon slanja provjeri da je poruka ispravno poslana u grupu</li></ul>
+    </div>
+  </div>
+
+  <!-- 2.9 eVISITOR -->
+  <div class="section">
+    <div class="section-label">Modul 2.9</div>
+    <h3>🛂 Prijava gostiju u e-Visitor</h3>
+    <p>E-Visitor je informacijski sustav za prijavu gostiju Hrvatskoj turističkoj zajednici i MUP-u. <strong>Svi gosti moraju biti prijavljeni na dan dolaska</strong>, a najkasnije do 48 sati od dolaska.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📄</span> Potrebni dokumenti</h4>
+      <p>Gosti moraju dostaviti valjane osobne dokumente: osobna iskaznica, putovnica, ili vozačka dozvola (ako sadrži ime, prezime, datum rođenja i broj dokumenta).</p>
+    </div>
+    <div class="warning-box"><p><strong>⚠️ GDPR:</strong> Fotografije dokumenata koristimo <strong>isključivo</strong> za zakonsku prijavu i brišu se nakon prijave. Ne dijele se s trećim stranama.</p></div>
+  </div>
+
+  <!-- 2.10 SUPERVISOR -->
+  <div class="section">
+    <div class="section-label">Modul 2.10</div>
+    <h3>🔎 Supervisor kontrola + Terenski zadaci</h3>
+    <p>U Zagrebu koordinator ili supervizor nasumično obiđe apartman nakon čišćenja i provjerava kvalitetu.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">✅</span> Checklista za provjeru apartmana</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text"><strong>Ulazak u apartman</strong> nakon čišćenja</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text"><strong>Vizualna provjera čistoće:</strong> podovi, površine, ogledala, kupaonica, posteljina, krevet</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text"><strong>Provjera funkcionalnosti:</strong> aparati, svjetla, klima, TV, Wi-Fi, topla voda, potrepštine</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text"><strong>Provjera izgleda:</strong> dekoracije, stolci, predmeti na mjestu — prostor uredan i reprezentativan</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div></div><div class="step-text">Ako nešto nije u redu → <strong>obavijestiti čistačice</strong> + evidentirati u Supervisor obrazac</div></div>
+      </div>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">📬</span> Fiksni terenski zadaci (mjesečno)</h4>
+      <ul><li><strong>Prikupljanje pošte (2x tjedno):</strong> Petrinjska 9, Milana Amruša 11, Jurišićeva 1a, Trg Bana Jelačića 3</li><li><strong>Očitavanje brojila (jednom mjesečno):</strong> ZP12, ZA2-5, ZP20, ZA1</li></ul>
+      <p style="margin-top:8px;">Napomene za terenski rad nalaze se u <strong>Google kalendaru</strong>.</p>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section">
+    <div class="checklist"><h4>✅ Checklista za Dan 2</h4><p style="color:var(--text-sec);font-size:.84rem;margin-bottom:14px;">Na kraju dana mentor provjerava:</p>
+      <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">Znam redoslijed dnevnih zadataka i gdje ih vidim (Google kalendar)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Znam označiti odrađeni zadatak u kalendaru (desni klik → crna boja)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Znam otvoriti sve komunikacijske kanale i odgovoriti na poruke (WA, mail, Booking, Airbnb)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Znam poslati check-out poruku (CO KB vs CO KOD template)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Znam pripremiti reminder + payment link i odabrati pravi template</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Znam poslati self kodove u 15:00 i odabrati pravi template po tipu ulaska</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Znam poslati check-in poruku i provjeriti kod u Rentliu vs Nuclinu</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Razumijem tablicu dolazaka i sve njene stupce</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">Znam pripremiti i poslati raspored čišćenja u WhatsApp grupu</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c10"><label for="c10">Znam prijaviti gosta u e-Visitor i razumijem GDPR pravila</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c11"><label for="c11">Razumijem supervizorsku kontrolu i što sve treba provjeriti</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c12"><label for="c12">Znam ubaciti reminder u kalendar kad me kolega zatraži</label></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="text-align:center;margin-top:36px;"><p><strong>🎯 Sutra te čeka Dan 3:</strong> Hospitality procedure — žalbe gostiju, kvarovi, situacije s rezervacijama, direktne rezervacije i recenzije.</p></div>
+</main>
+
+<footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 2 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
+</body>
+</html>
