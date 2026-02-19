@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irundo — HC Koordinator Priručnik</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dark: #1a1a2e;
+    --text: #2c3e50;
+    --text-secondary: #6b7c8d;
+    --text-light: #9aacbb;
+    --border: #eaeef2;
+    --bg: #ffffff;
+    --bg-soft: #f7f8fa;
+    --accent: #c8a96e;
+    --accent-dark: #a88c55;
+    --red: #d94f5c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+  a { text-decoration: none; color: inherit; }
+
+  /* ── HEADER ── */
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: rgba(255,255,255,.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .header-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.4rem;
+    color: var(--dark);
+    letter-spacing: 1px;
+  }
+  .header-logo img { height: 28px; }
+  .header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+  .header-nav a {
+    font-size: .82rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color .2s;
+  }
+  .header-nav a:hover { color: var(--text); }
+  .header-nav a.active { color: var(--text); font-weight: 600; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 100px 48px 80px;
+    text-align: center;
+    background: var(--bg-soft);
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .hero-inner { max-width: 680px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--accent-dark);
+    margin-bottom: 24px;
+    padding: 6px 16px;
+    border: 1px solid rgba(200,169,110,.3);
+    border-radius: 100px;
+    background: rgba(200,169,110,.06);
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--dark);
+    margin-bottom: 20px;
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    max-width: 500px;
+    margin: 0 auto 32px;
+    line-height: 1.7;
+  }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    margin-top: 40px;
+  }
+  .hero-stat {
+    text-align: center;
+  }
+  .hero-stat .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    color: var(--dark);
+    line-height: 1;
+  }
+  .hero-stat .label {
+    font-size: .72rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 880px; margin: 0 auto; padding: 64px 40px 80px; }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-bottom: 28px;
+  }
+
+  /* ── DAY CARDS ── */
+  .days { display: flex; flex-direction: column; gap: 12px; margin-bottom: 64px; }
+
+  .day-card {
+    display: flex;
+    align-items: stretch;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all .25s ease;
+  }
+  .day-card:hover {
+    border-color: #d0d8e0;
+    box-shadow: 0 8px 32px rgba(0,0,0,.06);
+    transform: translateY(-2px);
+  }
+
+  .day-num-col {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    flex-shrink: 0;
+  }
+  .day-num-col .sup {
+    font-size: .58rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 2px;
+  }
+  .day-num-col .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem;
+    line-height: 1;
+    color: var(--dark);
+  }
+  .day-card:hover .day-num-col .num { color: var(--red); }
+
+  .day-body {
+    flex: 1;
+    padding: 22px 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .day-body h3 {
+    font-size: .95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .day-body p {
+    font-size: .82rem;
+    color: var(--text-secondary);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .day-tag {
+    display: inline-block;
+    font-size: .62rem;
+    font-weight: 700;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .tag-theory { background: #eef3ff; color: #4a6fa5; }
+  .tag-practice { background: #eefbf3; color: #2d8659; }
+  .tag-eval { background: #fef3ee; color: #b8762e; }
+  .tag-placeholder { background: #fff5ee; color: #c47a30; }
+
+  .day-arrow {
+    width: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #d0d8e0;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    transition: color .2s;
+  }
+  .day-card:hover .day-arrow { color: var(--red); }
+
+  /* ── RESOURCES ── */
+  .resources { margin-bottom: 64px; }
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+  .resource-item {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all .2s;
+  }
+  .resource-item:hover {
+    border-color: #d0d8e0;
+    box-shadow: 0 4px 16px rgba(0,0,0,.04);
+  }
+  .resource-item .emoji { font-size: 1.4rem; display: block; margin-bottom: 8px; }
+  .resource-item strong { font-size: .82rem; color: var(--text); display: block; margin-bottom: 2px; }
+  .resource-item span { font-size: .72rem; color: var(--text-light); }
+
+  /* ── NOTE ── */
+  .note {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    background: var(--bg-soft);
+    margin-bottom: 64px;
+  }
+  .note p {
+    font-size: .88rem;
+    color: var(--text-secondary);
+  }
+  .note strong { color: var(--text); }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--dark);
+    color: white;
+    padding: 56px 48px 40px;
+  }
+  .footer-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+  }
+  .footer-left {}
+  .footer-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 12px;
+  }
+  .footer-left p {
+    font-size: .78rem;
+    color: rgba(255,255,255,.4);
+    line-height: 1.6;
+    max-width: 300px;
+  }
+  .footer-right { text-align: right; }
+  .footer-right p {
+    font-size: .78rem;
+    color: rgba(255,255,255,.35);
+    margin-bottom: 4px;
+  }
+  .footer-right a {
+    color: rgba(255,255,255,.55);
+    font-size: .78rem;
+    transition: color .2s;
+  }
+  .footer-right a:hover { color: white; }
+  .footer-bottom {
+    max-width: 880px;
+    margin: 40px auto 0;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: .72rem;
+    color: rgba(255,255,255,.25);
+  }
+  .footer-tagline {
+    font-size: .82rem;
+    color: rgba(255,255,255,.45);
+    font-style: italic;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .header { padding: 16px 20px; }
+    .header-nav { gap: 16px; }
+    .header-nav a { font-size: .75rem; }
+    .hero { padding: 60px 24px 48px; }
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { gap: 24px; }
+    .hero-stat .num { font-size: 1.5rem; }
+    .main { padding: 40px 20px 60px; }
+    .day-card { flex-direction: column; }
+    .day-num-col { width: 100%; flex-direction: row; gap: 8px; padding: 14px 20px; border-right: none; border-bottom: 1px solid var(--border); }
+    .day-arrow { display: none; }
+    .resource-grid { grid-template-columns: 1fr 1fr; }
+    .footer-inner { flex-direction: column; gap: 24px; }
+    .footer-right { text-align: left; }
+    .footer { padding: 40px 24px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">Irundo</div>
+  <nav class="header-nav">
+    <a href="#dani" class="active">Priručnik</a>
+    <a href="#resursi">Resursi</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">Onboarding program</div>
+    <h1>Edukacijski priručnik za HC Koordinatora</h1>
+    <p>Sedmodnevni program koji te vodi od upoznavanja branda do potpuno samostalne smjene. Sve na jednom mjestu.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">7</div>
+        <div class="label">Dana edukacije</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">50+</div>
+        <div class="label">Procedura</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">12</div>
+        <div class="label">Scenarija</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">288+</div>
+        <div class="label">Jedinica</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- NOTE -->
+  <div class="note">
+    <p><strong>👋 Dobrodošao/la u Irundo tim!</strong> Ovaj priručnik je tvoj vodič kroz prvih 7 dana. Svaki dan pokriva jedno ključno područje — klikni na dan da otvoriš sadržaj. Preporučujemo da ih prolaziš redom, zajedno s mentorom.</p>
+  </div>
+
+  <!-- DAYS -->
+  <h2 class="section-title" id="dani">Program po danima</h2>
+  <div class="days">
+
+    <a href="Irundo_HC_Prirucnik_Dan1.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">1</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-theory">Teorija</span>
+        <h3>Uvod u Irundo</h3>
+        <p>Brand story i vizija, portfolio (288+ jedinica u 8 destinacija), svi alati (Rentlio, Nuclino, Extraneti, WA), hospitality standardi i uloga HC koordinatora.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan2.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">2</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-theory">Teorija</span>
+        <h3>Svakodnevni workflow</h3>
+        <p>Kompletni dnevni raspored 09:00–21:00 — poruke, check-in/out, self kodovi, tablica dolazaka, raspored čišćenja, eVisitor i supervisor kontrola.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan3.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">3</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-theory">Teorija</span>
+        <h3>Hospitality procedure</h3>
+        <p>Žalbe gostiju, kvarovi, situacije s rezervacijama, overbooking, direktne rezervacije, recenzije, vlasnici i susjedi, priprema apartmana.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan4.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">4</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-theory">Teorija</span>
+        <h3>Housekeeping & Facility</h3>
+        <p>Servisi za čišćenje, SOP standardi, Clean24 posteljina, prioriteti popravaka, Nuclino facility upute, Rovinj specifičnosti.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan5.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">5</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-placeholder">U pripremi</span>
+        <h3>Ville, resorti & Arena</h3>
+        <p>Specifičnosti svake ville, damage deposit, dodatne usluge, hostovi na terenu i Arena poliklinika. Sadržaj se finalizira.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan6.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">6</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-practice">Praksa</span>
+        <h3>Praktična obuka</h3>
+        <p>Samostalan rad uz nadzor mentora — cijeli workflow, 6 scenarija iz prakse, komunikacijski standardi i samoprocjena.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+    <a href="Irundo_HC_Prirucnik_Dan7.html" class="day-card">
+      <div class="day-num-col">
+        <span class="sup">Dan</span>
+        <span class="num">7</span>
+      </div>
+      <div class="day-body">
+        <span class="day-tag tag-eval">Evaluacija</span>
+        <h3>Završna simulacija</h3>
+        <p>Potpuno samostalna smjena bez pomoći, 3 situacije, završna evaluacija mentora i plan daljnjeg razvoja.</p>
+      </div>
+      <div class="day-arrow">→</div>
+    </a>
+
+  </div>
+
+  <!-- RESOURCES -->
+  <h2 class="section-title" id="resursi">Tvoji glavni resursi</h2>
+  <div class="resources">
+    <div class="resource-grid">
+      <div class="resource-item">
+        <span class="emoji">📋</span>
+        <strong>Nuclino</strong>
+        <span>SOP, Facility, upute</span>
+      </div>
+      <div class="resource-item">
+        <span class="emoji">🏨</span>
+        <strong>Rentlio</strong>
+        <span>PMS — rezervacije, kokpit</span>
+      </div>
+      <div class="resource-item">
+        <span class="emoji">💬</span>
+        <strong>WhatsApp grupe</strong>
+        <span>Čišćenje, koordinacija</span>
+      </div>
+      <div class="resource-item">
+        <span class="emoji">📊</span>
+        <strong>Google Sheets</strong>
+        <span>Dolasci, evidencije</span>
+      </div>
+      <div class="resource-item">
+        <span class="emoji">🌐</span>
+        <strong>Extraneti</strong>
+        <span>Booking, Airbnb, Expedia</span>
+      </div>
+      <div class="resource-item">
+        <span class="emoji">📅</span>
+        <strong>Google Calendar</strong>
+        <span>Dnevni raspored zadataka</span>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-logo">Irundo</div>
+      <p>Edukacijski priručnik za Junior Hospitality Koordinatora. Interno izdanje za onboarding novih članova tima.</p>
+    </div>
+    <div class="footer-right">
+      <p>Irundo d.o.o.</p>
+      <p>Petrinjska 9, 10000 Zagreb</p>
+      <p style="margin-top:8px;">
+        <a href="mailto:info@irundo.com">info@irundo.com</a>
+      </p>
+      <p>
+        <a href="https://www.irundo.com" target="_blank">www.irundo.com</a>
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Irundo</p>
+    <span class="footer-tagline">Be adventurous. Feel at home. 🐦</span>
+  </div>
+</footer>
+
+</body>
+</html>
