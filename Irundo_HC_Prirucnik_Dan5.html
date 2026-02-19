@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irundo HC Koordinator — Dan 5</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#1a1a2e;--text:#2c3e50;--text-sec:#6b7c8d;--text-light:#9aacbb;--border:#eaeef2;--bg:#fff;--bg-soft:#f7f8fa;--accent:#c8a96e;--accent-dark:#a88c55;--red:#d94f5c}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);z-index:100}
+  .site-header-logo{height:26px}
+  .site-header-nav{display:flex;align-items:center;gap:28px}
+  .site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}
+  .site-header-nav a:hover{color:var(--text)}
+  .day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2026/01/nerolika_8_A4274-1-scaled.jpg') center/cover no-repeat;position:relative}
+  .hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
+  .hero{padding:40px 48px 32px}
+  .hero-inner{max-width:880px;margin:0 auto}
+  .hero-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:20px;padding:6px 16px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;line-height:1.2;color:var(--dark);margin-bottom:14px}
+  .hero h1 span{color:var(--red)}
+  .hero .sub{font-size:1.02rem;color:var(--text-sec);max-width:580px;line-height:1.7}
+  .progress-bar{background:var(--bg-soft);border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:0 48px}
+  .progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:14px 0;overflow-x:auto}
+  .progress-day{display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .progress-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+  .progress-dot.done{background:#2ecc71;color:#fff}
+  .progress-dot.active{background:var(--red);color:#fff}
+  .progress-dot.inactive{background:#e8edf2;color:var(--text-light)}
+  .progress-line{width:16px;height:2px;background:#dde3e8;flex-shrink:0}
+  .progress-label{font-size:.68rem;color:var(--text-light);margin-left:2px;font-weight:500}
+  .progress-label.done{color:#2ecc71;font-weight:600}
+  .progress-label.active{color:var(--red);font-weight:600}
+  .main{max-width:880px;margin:0 auto;padding:48px 40px 80px}
+  .day-header{display:flex;align-items:center;gap:20px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+  .day-number{width:60px;height:60px;border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg-soft)}
+  .day-number .label{font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light)}
+  .day-number .num{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--dark)}
+  .day-meta h2{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--dark);margin-bottom:3px}
+  .day-meta p{color:var(--text-sec);font-size:.9rem}
+  .section{margin-bottom:48px}
+  .section-label{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px}
+  .section-label::before{content:'';width:16px;height:2px;background:var(--accent)}
+  .section h3{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--dark);margin-bottom:18px;line-height:1.3}
+  .section>p{color:var(--text-sec);font-size:.9rem;margin-bottom:16px}
+  .card{background:var(--bg);border-radius:12px;padding:26px 28px;margin-bottom:14px;border:1px solid var(--border);transition:all .2s}
+  .card:hover{border-color:#d0d8e0;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+  .card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h4 .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .card p,.card li{color:var(--text-sec);font-size:.88rem;line-height:1.7}
+  .card ul{list-style:none;padding:0}
+  .card ul li{padding:4px 0 4px 20px;position:relative}
+  .card ul li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:600;font-size:.85rem}
+  .tip-box{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .tip-box p{font-size:.84rem;color:var(--text-sec);font-style:italic}
+  .tip-box strong{color:var(--text)}
+  .info-box{background:#f0f7ff;border-left:3px solid #3498db;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .info-box p{font-size:.84rem;color:#1a4a6b}
+  .info-box strong{color:#0a3a5b}
+  .warning-box{background:#fff8f0;border-left:3px solid #e67e22;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .warning-box p{font-size:.84rem;color:#8a5a1e}
+  .warning-box strong{color:#6b4200}
+  /* Part divider */
+  .part-divider{background:var(--dark);color:#fff;border-radius:12px;padding:28px 32px;margin:56px 0 40px;position:relative;overflow:hidden}
+  .part-divider::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);border-radius:50%}
+  .part-divider h2{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:4px}
+  .part-divider h2 span{color:var(--accent)}
+  .part-divider p{color:rgba(255,255,255,.6);font-size:.88rem}
+  /* Villa card */
+  .villa-card{background:var(--bg);border-radius:12px;padding:24px 26px;margin-bottom:14px;border:1px solid var(--border);border-left:4px solid var(--accent)}
+  .villa-card h4{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+  .villa-card p,.villa-card li{color:var(--text-sec);font-size:.84rem;line-height:1.7}
+  .villa-card ul{list-style:none;padding:0;margin-top:6px}
+  .villa-card ul li{padding:3px 0 3px 18px;position:relative}
+  .villa-card ul li::before{content:'•';position:absolute;left:0;color:var(--accent);font-weight:700}
+  .villa-card .tag{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+  .tag-host{background:#e8fde8;color:#27ae60}
+  .tag-owner{background:#fdf5e8;color:#e67e22}
+  .tag-special{background:#f0e8fd;color:#8e44ad}
+  /* Steps */
+  .steps{margin-top:8px}
+  .step{display:flex;gap:14px;align-items:flex-start}
+  .step-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;z-index:1}
+  .step-connector{width:2px;height:14px;background:#e0e0e0}
+  .step-text{background:var(--bg-soft);border-radius:8px;padding:8px 14px;flex:1;font-size:.84rem;color:var(--text-sec);line-height:1.6;border:1px solid var(--border)}
+  .step-text strong{color:var(--text)}
+  /* Arena table */
+  .arena-table{width:100%;border-collapse:collapse;margin:14px 0;background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:.84rem}
+  .arena-table thead{background:var(--dark);color:#fff}
+  .arena-table th{padding:10px 14px;text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+  .arena-table td{padding:10px 14px;color:var(--text-sec);border-bottom:1px solid #f0f0f0;vertical-align:top}
+  .arena-table tr:last-child td{border-bottom:none}
+  .arena-table tr:hover td{background:var(--bg-soft)}
+  .badge-fix{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.65rem;font-weight:700;background:#e8f4fd;color:#2980b9}
+  .badge-rbe{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.65rem;font-weight:700;background:#e8fde8;color:#27ae60}
+  /* WA example */
+  .wa-msg{background:#1a2e1a;color:#d4edda;padding:16px 20px;border-radius:10px;font-size:.82rem;line-height:1.8;margin:12px 0;font-style:italic}
+  /* Checklist */
+  .checklist{background:var(--bg);border-radius:12px;padding:28px;border:1px solid var(--border);margin-top:28px}
+  .checklist h4{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:18px}
+  .checklist-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
+  .checklist-item:last-child{border-bottom:none}
+  .checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
+  .checklist-item label{font-size:.86rem;color:var(--text-sec);cursor:pointer;flex:1}
+  .checklist-item input:checked+label{text-decoration:line-through;color:var(--text-light)}
+  /* Footer */
+  .footer{background:var(--dark);color:rgba(255,255,255,.4);padding:40px 48px;font-size:.78rem}
+  .footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  .footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
+  .footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.day-header{flex-direction:column;gap:10px}.card,.villa-card{padding:22px}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
+  @media print{.site-header,.progress-bar{display:none}body{background:#fff}.card,.villa-card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo">
+  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 5 od 7</span></nav>
+</header>
+<div class="hero-image"></div>
+<section class="hero"><div class="hero-inner">
+  <div class="hero-badge">Dan 5</div>
+  <h1>Villas & Arena<br><span>Premium segment i medicinski turizam</span></h1>
+  <p class="sub">Danas upoznaješ procedure za ville — damage deposite, hostove, dodatne usluge — te Arena polikliniku i njezin specifičan komunikacijski flow.</p>
+</div></section>
+<nav class="progress-bar"><div class="progress-inner">
+  <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Uvod</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Workflow</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Hospitality</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Housek. & Facility</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot active">5</div><span class="progress-label active">Ville</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">6</div><span class="progress-label">Praksa</span></div><div class="progress-line"></div>
+  <div class="progress-day"><div class="progress-dot inactive">7</div><span class="progress-label">Simulacija</span></div>
+</div></nav>
+
+<main class="main">
+  <div class="day-header"><div class="day-number"><span class="label">Dan</span><span class="num">5</span></div><div class="day-meta"><h2>Villas & Arena procedure</h2><p>Damage depositi, hostovi, specifičnosti svake ville, Arena komunikacijski flow</p></div></div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PART 1: VILLAS -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="part-divider">
+    <h2>Dio 1: <span>Villas</span></h2>
+    <p>Procedure za ville — damage depositi, organizacija hostova, naplata usluga i specifičnosti svake ville</p>
+  </div>
+
+  <!-- 5.1 UVOD VILLE -->
+  <div class="section">
+    <div class="section-label">Modul 5.1</div>
+    <h3>Ville — što ih čini posebnima</h3>
+    <p>Ville su specifičan segment Irundo portfelja. Za razliku od apartmana koji imaju standardizirane, template-bazirane procedure, <strong>svaka villa ima svoje specifičnosti</strong> — različite vlasnike, različite procedure za check-in, različite sustave naplate i posebne zahtjeve gostiju.</p>
+    <p>Procedure za ville su duže i kompleksnije od apartmanskih. Villas portfolio nam <strong>kontinuirano raste</strong> i nije ograničen na postojeće destinacije — stalno dolaze nove ville u različitim lokacijama.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🏡</span> Ključne razlike: ville vs. apartmani</h4>
+      <ul>
+        <li><strong>Personaliziranija komunikacija</strong> — gosti u villama očekuju premium razinu usluge, često traže dodatne usluge (izleti, grocery, transferi)</li>
+        <li><strong>Vlasnici su aktivno uključeni</strong> — svaka villa ima svoju WhatsApp grupu s vlasnicima, Igorom, Tomislavom, prodajom i HC koordinatorima</li>
+        <li><strong>Damage deposit</strong> — neke ville imaju refundable damage deposit koji se naplaćuje unaprijed</li>
+        <li><strong>Hostovi</strong> — u nekim villama vlasnici ili studenti dočekuju goste osobno</li>
+        <li><strong>Kompleksnije fakturiranje</strong> — različiti servisi za naplatu ovisno o villi (Worldline vs Borgun), provizije variraju</li>
+        <li><strong>Duži boravci</strong> — gosti u villama češće ostaju tjedan dana ili dulje</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <p><strong>ℹ️ Villas portfolio:</strong> Sve detalje o svakoj villi pronađi u Nuclinu pod "VILLE".</p>
+    </div>
+
+    <div class="card" style="padding:0;overflow:hidden;">
+      <div style="background:var(--dark);color:#fff;padding:14px 24px;display:flex;justify-content:space-between;align-items:center;">
+        <span style="font-size:.82rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;">Ville — Nuclino portfolio</span>
+        <span style="font-size:.68rem;color:rgba(255,255,255,.4);">9 objekata</span>
+      </div>
+      <div style="padding:6px 12px;">
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🏛️ Majestic Villa Lidija</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🏡 Noble Villas</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🌿 Bronzees Celeste</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🌳 Mugeba Villas</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🏖️ Ciccarelli</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🏠 Tie Vižinada</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🌅 Vista Divina Villas</div>
+        <div style="padding:12px 16px;border-bottom:1px solid var(--border);font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🌴 Palms Resort</div>
+        <div style="padding:12px 16px;font-weight:600;font-size:.88rem;display:flex;align-items:center;gap:10px;">🏘️ Nerolika Dubrovnik — Magnificent Terrace House</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5.2 DAMAGE DEPOSIT -->
+  <div class="section">
+    <div class="section-label">Modul 5.2</div>
+    <h3>💳 Damage deposit</h3>
+    <p>Neke ville imaju <strong>damage deposit</strong> koji je refundable — ako je nakon odlaska gosta sve u redu, depozit se vraća u cijelosti. Visina depozita ovisi o villi, a točan iznos uvijek možeš provjeriti u <strong>Nuclinu</strong>. Pratimo naplate kroz <strong>Villas Tracking</strong>.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> Postupak — damage deposit</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Provjeriti u <strong>Nuclinu</strong> ima li villa damage deposit i koliki je iznos</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Kreirati <strong>payment link</strong> u Borgunu ili Worldlineu (ovisi o villi — provjeri u Nuclinu)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Poslati gostu link za depozit <strong>7 dana prije dolaska</strong></div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">Upisati status u <strong>Villas Tracking</strong> — je li depozit naplaćen</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div></div><div class="step-text">Nakon check-outa: čistačice potvrde da je sve OK → <strong>refund</strong> kroz isti servis gdje smo radili payment link</div></div>
+      </div>
+    </div>
+
+    <div class="warning-box">
+      <p><strong>⚠️ Važno:</strong> Villas Tracking pregledavaj barem <strong>jednom tjedno</strong> da ne propustiš naplatu depozita. Ako gost nije platio depozit, šalji podsjetnik!</p>
+    </div>
+  </div>
+
+  <!-- 5.3 VILLAS TRACKING APP -->
+  <div class="section">
+    <div class="section-label">Modul 5.3</div>
+    <h3>📱 Villas Tracking — aplikacija za praćenje</h3>
+    <p>Sav operativni rad za ville prati se kroz našu internu aplikaciju na <strong>irundo.com/RezervacijeVille/</strong>. Aplikacija automatski povlači rezervacije iz Rentlia i dijeli ih po tablicama za svaku villu.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> Kako funkcionira — korak po korak</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Otvori aplikaciju: <strong>irundo.com/RezervacijeVille/</strong> — automatski povlači nove rezervacije iz Rentlia i raspoređuje ih po tablicama za svaku villu</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text"><strong>Automatski podaci:</strong> sustav sam popunjava jedinicu, kanal, Rentlio ID, datum dolaska, ime gosta, te info o damage depozitu i boravišnoj pristojbi</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text"><strong>Ručni unos:</strong> ETA gosta, dodatne usluge (transfer, doručak, kuhar...), status naplate, ime hosta, je li host kontaktiran, broj sati check-ina, priprema za gosta (cvijeće, vino, dječji krevetić...)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text"><strong>Naplata depozita i pristojbe:</strong> aplikacija prikazuje ima li villa damage deposit i turističku pristojbu — ručno označi je li naplaćeno ili nije</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div><div class="step-text"><strong>Završetak:</strong> kad je sve odrađeno (check-in, naplate, host) → označi checkbox na kraju reda</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">6</div></div><div class="step-text"><strong>Čišćenje:</strong> raspored čišćenja za sve ville automatski se generira za iduća 2 tjedna na vrhu aplikacije</div></div>
+      </div>
+    </div>
+
+    <div class="info-box">
+      <p><strong>ℹ️ Rutina:</strong> Provjeravaj aplikaciju <strong>svakodnevno ujutro i popodne</strong>. Unosi podatke čim gost potvrdi ETA ili dodatne zahtjeve. Prije dolaska gosta provjeri da su svi podaci točni i ažurirani.</p>
+    </div>
+  </div>
+
+  <!-- 5.4 DODATNE USLUGE -->
+  <div class="section">
+    <div class="section-label">Modul 5.4</div>
+    <h3>🛎️ Naplata dodatnih usluga</h3>
+    <p>Gosti u villama često traže razne dodatne usluge. Tu se radi o svemu — od cleaning feeja (gdje nije automatski naplaćeno), izleta, grocery prestockinga, transfera, do specijalnih zahtjeva. Sve se može organizirati i <strong>naplaćuje se unaprijed</strong>.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">💰</span> Primjeri dodatnih usluga</h4>
+      <ul>
+        <li><strong>Cleaning fee</strong> — gdje nije uključen u cijenu, naplaćuje se zasebno</li>
+        <li><strong>Grocery prestocking</strong> — narudžba namirnica prije dolaska gosta</li>
+        <li><strong>Izleti i aktivnosti</strong> — organizacija excursiona, rent-a-boat, wine tasting...</li>
+        <li><strong>Transfer</strong> — organizacija prijevoza od/do aerodroma</li>
+        <li><strong>Welcome paketi</strong> — priprema pića i proizvoda dobrodošlice</li>
+        <li><strong>Boravišna pristojba</strong> — za ville gdje se naplaćuje zasebno</li>
+      </ul>
+    </div>
+
+    <div class="tip-box">
+      <p><strong>💡 Napomena:</strong> Detaljnu proceduru za naplatu dodatnih usluga i specifičnosti naše provizije proći ćeš <strong>zajedno s mentorom</strong> jer svaka villa ima svoje pravilo. Bitno je za zapamtiti: sve se može organizirati za goste, ali se uvijek naplaćuje unaprijed.</p>
+    </div>
+  </div>
+
+  <!-- 5.5 HOSTOVI -->
+  <div class="section">
+    <div class="section-label">Modul 5.5</div>
+    <h3>🤝 Organizacija hostova za check-in</h3>
+    <p>U nekim villama vlasnici ili njihovi partneri osobno dočekuju goste. U drugima mi organiziramo externe hostove — studente koji rade na studentski ugovor.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">👤</span> Vlasnik/partner radi check-in</h4>
+      <p>Kod nekih villa vlasnik ili njegov partner osobno dočekuje goste. U tom slučaju <strong>mi radimo sve do dolaska gosta</strong> (komunikacija, kodovi, deposit, reminder) <strong>i nakon odlaska</strong> (check-out poruke, refund, računi). Vlasnik/partner preuzima sve između — dočekivanje, briga o gostu za vrijeme boravka.</p>
+      <p>Primjer: <strong>Villa Lidija</strong> — Daniela dočekuje goste i ona sve zna vezano za samu villu.</p>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">👥</span> Mi organiziramo hosta (studenti)</h4>
+      <p>Za Noble Villas, Bronzees Villas i ostale ville gdje nemamo vlasnika na terenu — <strong>mi organiziramo hostove</strong>. Imamo bazu studenata u WhatsApp grupama, gdje unaprijed pitamo tko preuzima koji dolazak.</p>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> Postupak organizacije hosta</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Poslati poruku u <strong>WhatsApp grupu studenata</strong> s detaljima dolaska</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Čekati da se netko javi — upisati u <strong>Villas Tracking</strong> tko preuzima</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text">Upisati hosta i u <strong>Student Tracking</strong> (zbog isplate na studentski ugovor na kraju mjeseca)</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div><div class="step-text">Host dolazi prije gosta — provjerava villu, pali <strong>svjetla, klime</strong>, priprema prostor</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">5</div></div><div class="step-text">Host dočekuje goste → <strong>mi preuzimamo daljnju komunikaciju</strong> s gostom</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#f0f4f8;color:var(--text);">💬</span> Primjer poruke u grupu studenata</h4>
+      <div class="wa-msg">Pozdrav, bi li možda netko mogao odraditi ova dva check-ina 23.8. u Noble? Mila dolazi kroz jutro, a Nika oko 16h.<br><br>Također, imamo i novi dolazak u Olu 23.8. nakon 16h 🙂</div>
+    </div>
+  </div>
+
+  <!-- 5.5 RAČUNI -->
+  <div class="section">
+    <div class="section-label">Modul 5.6</div>
+    <h3>🧾 Izrada računa za ville</h3>
+    <p>Izrada računa za ville je kompleksna jer svaka villa ima svoje specifičnosti oko provizije, naplate i servisa. Kompletna procedura je raspisana u tablici <strong>"RAČUNI IZRADA 2026"</strong>.</p>
+
+    <div class="info-box">
+      <p><strong>ℹ️ Ovo ćemo proći zajedno:</strong> Proceduru izrade računa za ville proći ćeš s mentorom kad bude prvi check-out/naplata za villas. Zbog kompleksnosti i razlika po villama, najbolje je učiti na stvarnom primjeru.</p>
+    </div>
+  </div>
+
+  <!-- 5.6 SPECIFIČNOSTI SVAKE VILLE -->
+  <div class="section">
+    <div class="section-label">Modul 5.7</div>
+    <h3>🏘️ Specifičnosti svake ville</h3>
+    <p>Svaka villa ima svoje procedure i specifičnosti. Ovo je pregled najvažnijih — za sve detalje provjeri u <strong>Nuclinu</strong>.</p>
+
+    <div class="villa-card">
+      <h4>🏛️ Majestic Villa Lidija <span class="tag tag-owner">Daniela radi check-in</span></h4>
+      <ul>
+        <li>Daniela osobno dočekuje goste — ona zna sve o villi</li>
+        <li>Gosti često naručuju <strong>grocery prestocking</strong> — mi naručujemo, Daniela rasporedi po villi</li>
+        <li><strong>Nemamo damage deposit</strong></li>
+        <li>Naplaćujemo smještaj, cleaning fee i boravišnu pristojbu kroz <strong>Worldline</strong></li>
+        <li>Ostale usluge naplaćujemo kroz <strong>Irundo Borgun</strong></li>
+      </ul>
+    </div>
+
+    <div class="villa-card">
+      <h4>🏡 Noble Villas <span class="tag tag-host">Mi organiziramo hosta</span></h4>
+      <ul>
+        <li>Mi organiziramo hostove kroz bazu studenata</li>
+        <li>Naručujemo <strong>potrošni materijal i welcome pakete</strong></li>
+        <li>Hostovi preuzimaju narudžbe, pripremaju welcome paket i pića dobrodošlice <strong>prije dolaska gosta</strong></li>
+      </ul>
+    </div>
+
+    <div class="villa-card">
+      <h4>🌿 Bronzees Celeste <span class="tag tag-host">Mi organiziramo hosta</span></h4>
+      <ul>
+        <li>Isto kao Noble — mi organiziramo hosta, welcome paket i potrošni materijal</li>
+        <li>Detalje provjeri u Nuclinu</li>
+      </ul>
+    </div>
+
+    <div class="villa-card">
+      <h4>🌳 Mugeba Villas <span class="tag tag-special">WA grupa</span></h4>
+      <ul>
+        <li>Sve se hendla u <strong>WhatsApp grupi</strong> — direktna komunikacija</li>
+        <li>Imaju svog <strong>domara</strong></li>
+        <li>Specifičnosti provjeri u Nuclinu</li>
+      </ul>
+    </div>
+
+    <div class="villa-card">
+      <h4>🏖️ Ciccarelli — Brač <span class="tag tag-special">3 u 1</span></h4>
+      <ul>
+        <li>Prodaje se kao <strong>3 zasebna apartmana</strong> ili kao <strong>jedna villa s 3 kuće</strong></li>
+        <li>Detalje provjeri u Nuclinu</li>
+      </ul>
+    </div>
+
+    <div class="villa-card">
+      <h4>🏠 Ostale ville</h4>
+      <ul>
+        <li><strong>Tie Vižinada, Vista Divina Villas, Palms Resort, Nerolika Dubrovnik</strong> — specifičnosti za svaku villu provjeri u Nuclinu pod odgovarajućom kategorijom</li>
+        <li>Portfolio raste — nove ville dolaze redovito</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════════════ -->
+  <!-- PART 2: ARENA -->
+  <!-- ════════════════════════════════════════ -->
+  <div class="part-divider">
+    <h2>Dio 2: <span>Arena Poliklinika</span></h2>
+    <p>Komunikacijski flow, prijava pacijenata, koordinacija s Petrom i vlasnicima apartmana</p>
+  </div>
+
+  <!-- 5.7 ARENA UVOD -->
+  <div class="section">
+    <div class="section-label">Modul 5.8</div>
+    <h3>🏥 Arena Poliklinika — uvod</h3>
+    <p>Arena poliklinika u Zagrebu nudi medicinski turizam — pacijenti dolaze na zahvate i borave u apartmanima u blizini. HC tim preuzima dio komunikacijskog flowa od P&S (prodaje), a ključna kontakt osoba s njihove strane je <strong>Petra</strong>.</p>
+    <p>Komunikacija za Arena apartmane je u osnovi slična standardnoj komunikaciji s gostima i čistačicama, ali ima specifičnosti vezane uz pacijente, šifre i vlasnike.</p>
+
+    <div class="info-box">
+      <p><strong>ℹ️ Tablica:</strong> Svi Arena apartmani i kontakti nalaze se u tablici <strong>"TABLICA ARENA ZA HC"</strong>. Tu su podijeljeni na fix apartmane (naše) i RBE apartmane (vlasničke).</p>
+    </div>
+  </div>
+
+  <!-- 5.8 FIX APARTMANI -->
+  <div class="section">
+    <div class="section-label">Modul 5.9</div>
+    <h3>🔑 Arena — fix apartmani (naši)</h3>
+    <p>Imamo <strong>4 fix apartmana</strong>: STAN5, STAN17, STAN25 i STAN31. Čisti ih i održava <strong>ABS</strong> (čistačice). HC tim koordinira:</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> HC zadaci za fix apartmane</h4>
+      <ul>
+        <li><strong>Raniji/kasniji ulazak/izlazak:</strong> Petra upisuje svaki pod napomene u Rentlio. Sva odstupanja provjeravamo s Petrom i koordiniramo s ABS timom za čišćenje</li>
+        <li><strong>Problemi u apartmanu:</strong> Petra javi HC-u → HC komunicira s ABS-om u grupu za Lanište ili ZG grupu, ovisno je li netko od ABS na terenu</li>
+        <li><strong>Slanje šifri:</strong> Petra javlja za koji apartman treba šifra → HC provjeri i proslijedi Petri</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fde8e8;color:#c0392b;">🔧</span> ABS koordinacija i popravci</h4>
+      <p>ABS tim (Antonio) nalazi se u WA grupi za Lanište.</p>
+      <ul>
+        <li>Ako su ABS na lokaciji ili će biti taj dan → <strong>sitnije probleme rješavaju oni</strong></li>
+        <li>Ako nisu na lokaciji → čeka se sljedeći dan, osim hitnih situacija</li>
+        <li><strong>Sve hitne situacije</strong> raspravljati u ZG grupi s direktorima</li>
+      </ul>
+    </div>
+
+    <div class="warning-box">
+      <p><strong>⚠️ Najčešći problem — bojler:</strong> Treba resetirati bojler jer nema tople vode/grijanja. Bitno: <strong>nikako ne upućivati pacijente da sami resetiraju bojler!</strong> Uvijek slati nekoga od tima.</p>
+    </div>
+  </div>
+
+  <!-- 5.9 RBE APARTMANI -->
+  <div class="section">
+    <div class="section-label">Modul 5.10</div>
+    <h3>🟢 Arena — RBE apartmani (vlasnički)</h3>
+    <p>RBE apartmani su <strong>zelene rezervacije s imenom</strong> u Rentliu — to su vlasnički apartmani koji se popunjavaju po potrebi. Imamo <strong>5 apartmana (3 vlasnika)</strong> — sve je navedeno u tablici Arena za HC, drugi sheet sadrži kontakte vlasnika.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">📞</span> Komunikacija za RBE apartmane</h4>
+      <ul>
+        <li>Problemi → <strong>Petra javi HC-u</strong> → HC javlja <strong>direktno vlasniku</strong> (kontakt u tablici)</li>
+        <li>S vlasnicima najčešće komuniciramo putem <strong>WhatsApp</strong></li>
+        <li>Za 3 apartmana Petra zna unaprijed šifre</li>
+        <li>Za <strong>Daydream (1BR i studio)</strong> — šifre se mijenjaju svakodnevno</li>
+        <li>Ako se promijeni šifra za bilo koji apartman → <strong>obavezno javiti Petri i Veroniki/Martini</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#f0f4f8;color:var(--text);">💬</span> Primjer RBE komunikacijskog flowa</h4>
+      <div class="wa-msg">Petra: Molim te šifru za Daydream studio za sutra i/ili kada pacijent može ući u apartman, odnosno može li kasniji izlazak?<br><br>→ HC pošalje vlasniku Špeharu, provjeri sve info i javi nazad Petri.</div>
+      <p style="margin-top:10px;">U RBE apartmanima ne bi trebalo biti nikakvih problema i/ili su rijetki. Svi problemi se direktno javljaju vlasnicima.</p>
+    </div>
+  </div>
+
+  <!-- 5.10 PRIJAVA GOSTIJU ARENA -->
+  <div class="section">
+    <div class="section-label">Modul 5.11</div>
+    <h3>📝 Prijava gostiju / pacijenata Arena</h3>
+    <p>Gosti Arena poliklinike ispunjavaju <strong>Google Form</strong> koji nam stiže u Google Sheet. Te podatke unosimo ručno u Rentlio.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> Postupak prijave</h4>
+      <div class="steps">
+        <div class="step"><div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div><div class="step-text">Gost/pacijent ispuni <strong>Google Form</strong> → podaci stignu u Google Sheet</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div><div class="step-text">Otvoriti <strong>Arena Rentlio</strong> → pronaći rezervaciju u kalendaru</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div><div class="step-text"><strong>Copy/paste</strong> svih podataka iz Google Sheeta u Rentlio rezervaciju</div></div>
+        <div class="step"><div class="step-line"><div class="step-num">4</div></div><div class="step-text">Ako fale podaci → javiti <strong>Petri</strong> da nam ih pošalje</div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🔄</span> Dnevna provjera (2x dnevno)</h4>
+      <p><strong>2 puta dnevno</strong> provjeravamo rezervacije i unosimo šifru iz Google Sheet tablice <strong>"Poliklinika Arena & HC"</strong> u komentar rezervacije u tom apartmanu u Rentliu.</p>
+    </div>
+  </div>
+
+  <!-- CHECKLIST -->
+  <div class="section">
+    <div class="checklist"><h4>✅ Checklista za Dan 5</h4><p style="color:var(--text-sec);font-size:.84rem;margin-bottom:14px;">Mentor provjerava razumijevanje:</p>
+      <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">Razumijem razlike između villa i apartmanskog segmenta</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Znam postupak za damage deposit — provjera, link, naplata 7 dana prije, refund</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Znam organizirati hosta — WA grupa studenata, Villas Tracking, Student Tracking</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Razumijem naplatu dodatnih usluga (cleaning fee, grocery, izleti) — sve unaprijed</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Poznajem specifičnosti ključnih villa (Lidija, Noble, Mugeba, Ciccarelli)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Razumijem Arena flow — fix apartmani (ABS) vs RBE apartmani (vlasnici)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Znam postupak prijave Arena gostiju — Google Form → Sheet → Rentlio</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Znam da se Arena šifre provjeravaju 2x dnevno i da bojler nikad ne resetiraju pacijenti</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">Znam gdje pronaći sve detalje — Nuclino (Ville), Tablica Arena za HC, Računi Izrada 2026</label></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="text-align:center;margin-top:36px;"><p><strong>🎯 Sutra te čeka Dan 6:</strong> Praksa uz mentora — prvi put samostalno prolaziš dnevni workflow od početka do kraja uz nadzor mentora.</p></div>
+</main>
+
+<footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 5 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
+</body>
+</html>
