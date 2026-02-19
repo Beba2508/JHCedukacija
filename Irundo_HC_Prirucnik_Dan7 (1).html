@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irundo HC Koordinator — Dan 7</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#1a1a2e;--text:#2c3e50;--text-sec:#6b7c8d;--text-light:#9aacbb;--border:#eaeef2;--bg:#fff;--bg-soft:#f7f8fa;--accent:#c8a96e;--accent-dark:#a88c55;--red:#d94f5c}
+  *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}a{text-decoration:none;color:inherit}
+  .site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);z-index:100}.site-header-logo{height:26px}.site-header-nav{display:flex;align-items:center;gap:28px}.site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}.site-header-nav a:hover{color:var(--text)}.day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2026/01/nerolika_main_A3988-1-scaled.jpg') center/cover no-repeat;position:relative}.hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
+  .hero{padding:40px 48px 32px}.hero-inner{max-width:880px;margin:0 auto}.hero-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:20px;padding:6px 16px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}.hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;line-height:1.2;color:var(--dark);margin-bottom:14px}.hero h1 span{color:var(--red)}.hero .sub{font-size:1.02rem;color:var(--text-sec);max-width:580px;line-height:1.7}
+  .progress-bar{background:var(--bg-soft);border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:0 48px}.progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:14px 0;overflow-x:auto}.progress-day{display:flex;align-items:center;gap:5px;white-space:nowrap}.progress-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}.progress-dot.done{background:#2ecc71;color:#fff}.progress-dot.active{background:var(--red);color:#fff}.progress-dot.inactive{background:#e8edf2;color:var(--text-light)}.progress-line{width:16px;height:2px;background:#dde3e8;flex-shrink:0}.progress-label{font-size:.68rem;color:var(--text-light);margin-left:2px;font-weight:500}.progress-label.done{color:#2ecc71;font-weight:600}.progress-label.active{color:var(--red);font-weight:600}
+  .main{max-width:880px;margin:0 auto;padding:48px 40px 80px}.day-header{display:flex;align-items:center;gap:20px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--border)}.day-number{width:60px;height:60px;border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg-soft)}.day-number .label{font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light)}.day-number .num{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--dark)}.day-meta h2{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--dark);margin-bottom:3px}.day-meta p{color:var(--text-sec);font-size:.9rem}
+  .section{margin-bottom:48px}.section-label{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px}.section-label::before{content:'';width:16px;height:2px;background:var(--accent)}.section h3{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--dark);margin-bottom:18px;line-height:1.3}.section>p{color:var(--text-sec);font-size:.9rem;margin-bottom:16px}
+  .card{background:var(--bg);border-radius:12px;padding:26px 28px;margin-bottom:14px;border:1px solid var(--border);transition:all .2s}.card:hover{border-color:#d0d8e0;box-shadow:0 4px 20px rgba(0,0,0,.04)}.card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px}.card h4 .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}.card p,.card li{color:var(--text-sec);font-size:.88rem;line-height:1.7}.card ul{list-style:none;padding:0}.card ul li{padding:4px 0 4px 20px;position:relative}.card ul li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:600;font-size:.85rem}
+  .tip-box{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}.tip-box p{font-size:.84rem;color:var(--text-sec);font-style:italic}.tip-box strong{color:var(--text)}.info-box{background:#f0f7ff;border-left:3px solid #3498db;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}.info-box p{font-size:.84rem;color:#1a4a6b}.info-box strong{color:#0a3a5b}.warning-box{background:#fff8f0;border-left:3px solid #e67e22;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}.warning-box p{font-size:.84rem;color:#8a5a1e}.warning-box strong{color:#6b4200}
+  .part-divider{background:var(--dark);color:#fff;border-radius:12px;padding:28px 32px;margin:56px 0 40px;position:relative;overflow:hidden}.part-divider::before{content:'';position:absolute;top:-20px;right:-20px;width:120px;height:120px;background:radial-gradient(circle,rgba(255,255,255,.06) 0%,transparent 70%);border-radius:50%}.part-divider h2{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:4px}.part-divider h2 span{color:var(--accent)}.part-divider p{color:rgba(255,255,255,.6);font-size:.88rem}
+  .eval-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0}.eval-card{background:var(--bg);border-radius:12px;padding:20px 22px;border:1px solid var(--border)}.eval-card h5{font-size:.82rem;font-weight:700;color:var(--text);margin-bottom:6px;display:flex;align-items:center;gap:6px}.eval-card p{font-size:.78rem;color:var(--text-sec);line-height:1.6}
+  .summary-box{background:linear-gradient(135deg,#f7f8fa,#eef1f5);border:1px solid var(--border);border-radius:12px;padding:28px;margin:20px 0}.summary-box h4{font-family:'DM Serif Display',serif;font-size:1.1rem;color:var(--dark);margin-bottom:12px}.summary-box ul{list-style:none;padding:0}.summary-box li{padding:6px 0 6px 24px;position:relative;font-size:.86rem;color:var(--text-sec)}.summary-box li::before{content:'✓';position:absolute;left:0;color:#2ecc71;font-weight:700}
+  .final-card{background:var(--dark);border-radius:12px;padding:32px;color:#fff;text-align:center;margin-top:40px}.final-card h3{font-family:'DM Serif Display',serif;font-size:1.5rem;font-weight:400;margin-bottom:10px}.final-card p{color:rgba(255,255,255,.65);font-size:.9rem;max-width:500px;margin:0 auto}
+  .checklist{background:var(--bg);border-radius:12px;padding:28px;border:1px solid var(--border);margin-top:28px}.checklist h4{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:18px}.checklist-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}.checklist-item:last-child{border-bottom:none}.checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--red);cursor:pointer;flex-shrink:0}.checklist-item label{font-size:.86rem;color:var(--text-sec);cursor:pointer;flex:1}.checklist-item input:checked+label{text-decoration:line-through;color:var(--text-light)}
+  .footer{background:var(--dark);color:rgba(255,255,255,.4);padding:40px 48px;font-size:.78rem}.footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}.footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}.footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.day-header{flex-direction:column;gap:10px}.eval-grid{grid-template-columns:1fr}.card{padding:22px}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
+  @media print{.site-header,.progress-bar{display:none}body{background:#fff}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="site-header"><img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo"><nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 7 od 7</span></nav></header>
+<div class="hero-image"></div>
+<section class="hero"><div class="hero-inner"><div class="hero-badge">Dan 7 — Završni dan</div><h1>Popodnevna smjena<br><span>+ završna evaluacija</span></h1><p class="sub">Zadnji dan edukacije. Samostalno odrađuješ popodnevni dio workflowa, a zatim s mentorom prolazite evaluaciju svega naučenog kroz tjedan.</p></div></section>
+<nav class="progress-bar"><div class="progress-inner"><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Uvod</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Workflow</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Hospitality</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Housek. & Facility</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Ville</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Praksa</span></div><div class="progress-line"></div><div class="progress-day"><div class="progress-dot active">7</div><span class="progress-label active">Evaluacija</span></div></div></nav>
+
+<main class="main">
+  <div class="day-header"><div class="day-number"><span class="label">Dan</span><span class="num">7</span></div><div class="day-meta"><h2>Popodnevna smjena + Evaluacija</h2><p>Samostalna praksa 15:00–21:00, završni pregled naučenog</p></div></div>
+
+  <div class="part-divider"><h2>Dio 1: <span>Popodnevna smjena</span></h2><p>Samostalno odrađuješ popodnevni dio workflowa (15:00–21:00)</p></div>
+
+  <div class="section"><div class="section-label">Modul 7.1</div><h3>🌆 Samostalna popodnevna smjena (15:00–21:00)</h3><p>Danas preuzmaš <strong>popodnevni dio workflowa</strong> — od slanja self kodova do prijave u eVisitor. Mentor je i dalje dostupan, ali cilj je potpuna samostalnost.</p>
+    <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">📋</span> Tvoj popodnevni raspored</h4><ul>
+      <li><strong>15:00</strong> — Slanje self kodova + računi za rezervacije na odlasku</li>
+      <li><strong>16:00</strong> — Priprema Google Sheeta za sutrašnje dolaske</li>
+      <li><strong>17:15</strong> — Check-in poruke / Code check up — provjera svih kodova</li>
+      <li><strong>18:00</strong> — Arena večernja provjera + Stay invoices check</li>
+      <li><strong>19:00</strong> — Prijava Arena gostiju</li>
+      <li><strong>19:30</strong> — Late arrival templates + recheck kodova</li>
+      <li><strong>20:15</strong> — Priprema i slanje rasporeda čišćenja</li>
+      <li><strong>21:00</strong> — eVisitor prijava svih gostiju</li>
+    </ul></div>
+    <div class="info-box"><p><strong>ℹ️</strong> Jučer si odradio/la jutarnju smjenu, danas popodnevnu. Zajedno to pokriva <strong>cijeli dnevni workflow od 09:00 do 21:00</strong> — sve što HC koordinator radi svaki dan.</p></div>
+  </div>
+
+  <div class="part-divider"><h2>Dio 2: <span>Završna evaluacija</span></h2><p>Pregled svega naučenog kroz 7 dana edukacije</p></div>
+
+  <div class="section"><div class="section-label">Modul 7.2</div><h3>📋 Što si naučio/la kroz tjedan</h3><p>Ovo je pregled svih ključnih područja koje si prošao/la. Mentor s tobom prolazi svako područje i procjenjuje razinu samostalnosti.</p>
+
+    <div class="eval-grid">
+      <div class="eval-card"><h5>📅 Dan 1 — Uvod</h5><p>Irundo portfolio, brendovi, alati (Rentlio, Nuclino, WA, Google Calendar), tim i uloge</p></div>
+      <div class="eval-card"><h5>⏰ Dan 2 — Workflow</h5><p>Kompletni dnevni raspored 09–21h, svi zadaci u kalendaru, poruke, kodovi, čišćenje, eVisitor</p></div>
+      <div class="eval-card"><h5>💬 Dan 3 — Hospitality</h5><p>Žalbe gostiju, kvarovi, direktne rezervacije, recenzije, vlasnici i susjedi</p></div>
+      <div class="eval-card"><h5>🧹 Dan 4 — Housekeeping</h5><p>Koordinacija čistačica, SOP standardi, logistika posteljine, popravci i maintenance</p></div>
+      <div class="eval-card"><h5>🏡 Dan 5 — Villas & Arena</h5><p>Damage depositi, hostovi, naplata usluga, specifičnosti villa, Arena flow</p></div>
+      <div class="eval-card"><h5>🧾 Dan 6 — Računi</h5><p>Opće upute, fiskalizacija, BP/avansi, procedure po destinaciji, villas fakturiranje</p></div>
+    </div>
+  </div>
+
+  <div class="section"><div class="section-label">Modul 7.3</div><h3>🎯 Ključne kompetencije za samostalan rad</h3>
+    <div class="summary-box"><h4>Komunikacija i poruke</h4><ul>
+      <li>Otvoriti sve kanale (WA, mail, Booking, Airbnb, Expedia) i odgovoriti u roku 1 sata</li>
+      <li>Odabrati pravi template za check-out, reminder, self, check-in poruke</li>
+      <li>Naša poruka uvijek mora biti zadnja u razgovoru</li>
+      <li>CRA account u dupliciranoj Rentlio aplikaciji</li>
+    </ul></div>
+    <div class="summary-box"><h4>Kodovi i dolasci</h4><ul>
+      <li>Self kodovi se šalju točno u 15:00 (ili ranije ako je apartman spreman)</li>
+      <li>Tablica dolazaka — svi stupci, statusi, kasni dolasci</li>
+      <li>Check-in poruke za provjeru kodova — Rentlio vs Nuclin</li>
+      <li>ZD2 Pinlock aktivacija, reminder u kalendar kad kolega zatraži</li>
+    </ul></div>
+    <div class="summary-box"><h4>Čišćenje i teren</h4><ul>
+      <li>Raspored čišćenja — rokovi po destinaciji (Sunny do 17h, ostalo do 21h, Villas nedjeljom)</li>
+      <li>Format poruka na WhatsAppu, Mugeba posebno (broj gosta)</li>
+      <li>Supervizorska kontrola apartmana — checklista provjere</li>
+      <li>Pošta 2x tjedno, brojila jednom mjesečno</li>
+    </ul></div>
+    <div class="summary-box"><h4>Hospitality situacije</h4><ul>
+      <li>Prioritet eskalacije: hitno → ZG grupa s direktorima, standardno → WA grupa</li>
+      <li>Dva svijeta: apartmani (template-bazirano) vs ville (personalizirano)</li>
+      <li>Booking recenzije: ChatGPT draft → provjeri. Airbnb: mi pišemo + potičemo</li>
+      <li>Direktne rezervacije: Borgun link odmah, rokovi naplate</li>
+    </ul></div>
+    <div class="summary-box"><h4>Ville i Arena</h4><ul>
+      <li>Villas Tracking aplikacija — svakodnevno ujutro i popodne</li>
+      <li>Damage deposit 7 dana prije, refund nakon CO ako je sve OK</li>
+      <li>Organizacija hostova — WA grupa studenata, Villas + Student Tracking</li>
+      <li>Arena: fix apartmani (ABS) vs RBE (vlasnici), Daydream šifre svaki dan, bojler nikad pacijent</li>
+    </ul></div>
+    <div class="summary-box"><h4>Računi</h4><ul>
+      <li>UVIJEK referenciraj tablicu RAČUNI IZRADA 2026</li>
+      <li>PDV 0% = jednostavno transakcijski. PDV 13%/25% = BP prebacivanje</li>
+      <li>Fiskaliziraj (ne eRačun), osim R1 za HR firme</li>
+      <li>Ville: 30%/70% avansni model, koordinacija s P&S timom</li>
+    </ul></div>
+  </div>
+
+  <div class="section"><div class="section-label">Modul 7.4</div><h3>📚 Tvoji resursi za rad</h3>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">🔗</span> Gdje tražiti informacije</h4><ul>
+      <li><strong>Nuclino</strong> — sve procedure, šifre, kontakti, specifičnosti po apartmanu/villi</li>
+      <li><strong>Google Calendar</strong> — dnevni zadaci, reminderi, mjesečne obaveze</li>
+      <li><strong>Tablica RAČUNI IZRADA 2026</strong> — procedura za svaku jedinicu i kanal</li>
+      <li><strong>Tablica ARENA ZA HC</strong> — Arena apartmani, kontakti vlasnika</li>
+      <li><strong>Villas Tracking</strong> — irundo.com/RezervacijeVille/</li>
+      <li><strong>Rasporedi čišćenja</strong> — beba2508.github.io/rasporedi/</li>
+      <li><strong>Ovaj priručnik</strong> — za referencu i ponavljanje</li>
+    </ul></div>
+  </div>
+
+  <div class="section">
+    <div class="checklist"><h4>✅ Završna checklista — Dan 7</h4><p style="color:var(--text-sec);font-size:.84rem;margin-bottom:14px;">Mentor potvrđuje spremnost za samostalan rad:</p>
+      <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">Samostalno odradio/la kompletnu popodnevnu smjenu (15:00–21:00)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Znam kompletni dnevni workflow od 09:00 do 21:00 bez gledanja u priručnik</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Mogu samostalno komunicirati s gostima na svim kanalima</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Znam reagirati na standardne hospitality situacije</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Mogu koordinirati čišćenje i slati rasporede za sve destinacije</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Razumijem villas procedure i Arena komunikacijski flow</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Mogu izdati račun uz pomoć tablice RAČUNI IZRADA 2026</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Znam gdje pronaći sve informacije kad mi trebaju (Nuclino, tablice, rasporedi)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">Osjećam se spremna za samostalan rad uz podršku tima</label></div>
+    </div>
+  </div>
+
+  <div class="final-card">
+    <h3>🎉 Čestitamo na završenoj edukaciji!</h3>
+    <p>Prošao/la si 7 dana intenzivne obuke. Sada si dio HC tima. Uvijek se možeš referencirati na ovaj priručnik, pitati kolege i koristiti Nuclino. Učenje nikad ne staje — svaki dan donosi nove situacije i prilike za rast.</p>
+    <p style="margin-top:16px;color:var(--accent);font-style:italic;">Be adventurous. Feel at home. 🐦</p>
+  </div>
+</main>
+<footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 7 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
+</body>
+</html>
