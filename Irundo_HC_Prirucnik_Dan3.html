@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Irundo HC Koordinator — Dan 3</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--dark:#1a1a2e;--text:#2c3e50;--text-sec:#6b7c8d;--text-light:#9aacbb;--border:#eaeef2;--bg:#fff;--bg-soft:#f7f8fa;--accent:#c8a96e;--accent-dark:#a88c55;--red:#d94f5c}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 48px;border-bottom:1px solid var(--border);position:sticky;top:0;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);z-index:100}
+  .site-header-logo{height:26px}
+  .site-header-nav{display:flex;align-items:center;gap:28px}
+  .site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}
+  .site-header-nav a:hover{color:var(--text)}
+  .day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2025/06/3_WW04875-scaled.jpg') center/cover no-repeat;position:relative}
+  .hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
+  .hero{padding:40px 48px 32px}
+  .hero-inner{max-width:880px;margin:0 auto}
+  .hero-badge{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:20px;padding:6px 16px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
+  .hero h1{font-family:'DM Serif Display',serif;font-size:2.8rem;font-weight:400;line-height:1.2;color:var(--dark);margin-bottom:14px}
+  .hero h1 span{color:var(--red)}
+  .hero .sub{font-size:1.02rem;color:var(--text-sec);max-width:580px;line-height:1.7}
+  .progress-bar{background:var(--bg-soft);border-bottom:1px solid var(--border);border-top:1px solid var(--border);padding:0 48px}
+  .progress-inner{max-width:880px;margin:0 auto;display:flex;align-items:center;gap:6px;padding:14px 0;overflow-x:auto}
+  .progress-day{display:flex;align-items:center;gap:5px;white-space:nowrap}
+  .progress-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0}
+  .progress-dot.done{background:#2ecc71;color:#fff}
+  .progress-dot.active{background:var(--red);color:#fff}
+  .progress-dot.inactive{background:#e8edf2;color:var(--text-light)}
+  .progress-line{width:16px;height:2px;background:#dde3e8;flex-shrink:0}
+  .progress-label{font-size:.68rem;color:var(--text-light);margin-left:2px;font-weight:500}
+  .progress-label.done{color:#2ecc71;font-weight:600}
+  .progress-label.active{color:var(--red);font-weight:600}
+  .main{max-width:880px;margin:0 auto;padding:48px 40px 80px}
+  .day-header{display:flex;align-items:center;gap:20px;margin-bottom:48px;padding-bottom:28px;border-bottom:1px solid var(--border)}
+  .day-number{width:60px;height:60px;border:1px solid var(--border);border-radius:14px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg-soft)}
+  .day-number .label{font-size:.52rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text-light)}
+  .day-number .num{font-family:'DM Serif Display',serif;font-size:1.7rem;line-height:1;color:var(--dark)}
+  .day-meta h2{font-family:'DM Serif Display',serif;font-size:1.6rem;font-weight:400;color:var(--dark);margin-bottom:3px}
+  .day-meta p{color:var(--text-sec);font-size:.9rem}
+  .section{margin-bottom:48px}
+  .section-label{display:inline-flex;align-items:center;gap:6px;font-size:.66rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-dark);margin-bottom:12px}
+  .section-label::before{content:'';width:16px;height:2px;background:var(--accent)}
+  .section h3{font-family:'DM Serif Display',serif;font-size:1.4rem;font-weight:400;color:var(--dark);margin-bottom:18px;line-height:1.3}
+  .section>p{color:var(--text-sec);font-size:.9rem;margin-bottom:16px}
+  .card{background:var(--bg);border-radius:12px;padding:26px 28px;margin-bottom:14px;border:1px solid var(--border);transition:all .2s}
+  .card:hover{border-color:#d0d8e0;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+  .card h4{font-size:.95rem;font-weight:700;color:var(--text);margin-bottom:10px;display:flex;align-items:center;gap:10px}
+  .card h4 .icon{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+  .card p,.card li{color:var(--text-sec);font-size:.88rem;line-height:1.7}
+  .card ul{list-style:none;padding:0}
+  .card ul li{padding:4px 0 4px 20px;position:relative}
+  .card ul li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:600;font-size:.85rem}
+  .tip-box{background:var(--bg-soft);border-left:3px solid var(--accent);border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .tip-box p{font-size:.84rem;color:var(--text-sec);font-style:italic}
+  .tip-box strong{color:var(--text)}
+  .info-box{background:#f0f7ff;border-left:3px solid #3498db;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .info-box p{font-size:.84rem;color:#1a4a6b}
+  .info-box strong{color:#0a3a5b}
+  .warning-box{background:#fff8f0;border-left:3px solid #e67e22;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0}
+  .warning-box p{font-size:.84rem;color:#8a5a1e}
+  .warning-box strong{color:#6b4200}
+  /* Dan3-specific: Compare grid */
+  .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+  .compare-box{border-radius:12px;padding:24px;border:2px solid}
+  .compare-box h5{font-size:.9rem;font-weight:700;margin-bottom:10px}
+  .compare-box p,.compare-box li{font-size:.82rem;line-height:1.7}
+  .compare-box ul{list-style:none;padding:0;margin-top:8px}
+  .compare-box ul li{padding:3px 0 3px 18px;position:relative}
+  .compare-box ul li::before{content:'•';position:absolute;left:0;font-weight:700}
+  .box-apt{border-color:#3498db;background:#f0f8ff}.box-apt h5{color:#2980b9}.box-apt ul li::before{color:#3498db}.box-apt p{color:#1a4a6b}
+  .box-villa{border-color:#d4a017;background:#fffbf0}.box-villa h5{color:#b8860b}.box-villa ul li::before{color:#d4a017}.box-villa p{color:#6b5a1a}
+  /* Dan3-specific: Situation card */
+  .situation{background:var(--bg);border-radius:12px;padding:26px 28px;margin-bottom:14px;border:1px solid var(--border);border-left:4px solid var(--red);transition:all .2s}
+  .situation:hover{border-color:#d0d8e0;box-shadow:0 4px 20px rgba(0,0,0,.04)}
+  .situation h4{font-size:.92rem;font-weight:700;margin-bottom:8px;color:var(--text)}
+  .situation p,.situation li{font-size:.86rem;color:var(--text-sec);line-height:1.7}
+  .situation ul{list-style:none;padding:0;margin-top:6px}
+  .situation ul li{padding:3px 0 3px 20px;position:relative}
+  .situation ul li::before{content:'→';position:absolute;left:0;color:var(--red);font-weight:600;font-size:.85rem}
+  .situation.border-orange{border-left-color:#e67e22}.situation.border-blue{border-left-color:#3498db}.situation.border-green{border-left-color:#27ae60}.situation.border-purple{border-left-color:#8e44ad}.situation.border-teal{border-left-color:#1abc9c}
+  /* Dan3-specific: Priority box */
+  .priority-box{background:var(--dark);color:#fff;border-radius:12px;padding:26px 28px;margin:20px 0}
+  .priority-box h4{color:var(--red);font-size:.9rem;font-weight:700;margin-bottom:10px;text-transform:uppercase;letter-spacing:1px}
+  .priority-box ol{padding-left:20px;margin:0}
+  .priority-box li{color:rgba(255,255,255,.85);font-size:.86rem;padding:3px 0;line-height:1.6}
+  .priority-box li strong{color:var(--red)}
+  /* Steps */
+  .steps{margin-top:8px}
+  .step{display:flex;gap:14px;align-items:flex-start}
+  .step-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+  .step-num{width:26px;height:26px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;z-index:1}
+  .step-connector{width:2px;height:14px;background:#e0e0e0}
+  .step-text{background:var(--bg-soft);border-radius:8px;padding:8px 14px;flex:1;font-size:.84rem;color:var(--text-sec);line-height:1.6;border:1px solid var(--border)}
+  .step-text strong{color:var(--text)}
+  /* Tables */
+  .proc-table{width:100%;border-collapse:collapse;margin-top:14px;background:var(--bg);border-radius:10px;overflow:hidden;border:1px solid var(--border);font-size:.84rem}
+  .proc-table thead{background:var(--dark);color:#fff}
+  .proc-table th{padding:10px 14px;text-align:left;font-size:.68rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+  .proc-table td{padding:10px 14px;color:var(--text-sec);border-bottom:1px solid #f0f0f0;vertical-align:top}
+  .proc-table tr:last-child td{border-bottom:none}
+  .proc-table tr:hover td{background:var(--bg-soft)}
+  .msg-template{background:#1a2e1a;color:#d4edda;padding:16px 20px;border-radius:10px;font-size:.82rem;line-height:1.8;margin:12px 0;font-style:italic}
+  /* Checklist */
+  .checklist{background:var(--bg);border-radius:12px;padding:28px;border:1px solid var(--border);margin-top:28px}
+  .checklist h4{font-family:'DM Serif Display',serif;font-size:1.15rem;color:var(--dark);margin-bottom:18px}
+  .checklist-item{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
+  .checklist-item:last-child{border-bottom:none}
+  .checklist-item input[type="checkbox"]{width:18px;height:18px;accent-color:var(--red);cursor:pointer;flex-shrink:0}
+  .checklist-item label{font-size:.86rem;color:var(--text-sec);cursor:pointer;flex:1}
+  .checklist-item input:checked+label{text-decoration:line-through;color:var(--text-light)}
+  /* Footer */
+  .footer{background:var(--dark);color:rgba(255,255,255,.4);padding:40px 48px;font-size:.78rem}
+  .footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+  .footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
+  .footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.compare-grid{grid-template-columns:1fr}.day-header{flex-direction:column;gap:10px}.card,.situation{padding:22px}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
+  @media print{.site-header,.progress-bar{display:none}body{background:#fff}.card,.situation{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo">
+  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 3 od 7</span></nav>
+</header>
+<div class="hero-image"></div>
+<section class="hero"><div class="hero-inner">
+  <div class="hero-badge">Dan 3</div>
+  <h1>Hospitality procedure<br><span>Komunikacija, situacije, rješenja</span></h1>
+  <p class="sub">Danas učiš kako reagirati u svim mogućim situacijama s gostima — od žalbi i kvarova do direktnih rezervacija, recenzija i odnosa s vlasnicima.</p>
+</div></section>
+<nav class="progress-bar">
+  <div class="progress-inner">
+    <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Uvod</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot done">✓</div><span class="progress-label done">Workflow</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot active">3</div><span class="progress-label active">Hospitality</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot inactive">4</div><span class="progress-label">Housek. & Facility</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot inactive">5</div><span class="progress-label">Ville</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot inactive">6</div><span class="progress-label">Praksa</span></div>
+    <div class="progress-line"></div>
+    <div class="progress-day"><div class="progress-dot inactive">7</div><span class="progress-label">Simulacija</span></div>
+  </div>
+</nav>
+
+<!-- ══════ MAIN ══════ -->
+<main class="main">
+
+  <div class="day-header">
+    <div class="day-number"><span class="label">Dan</span><span class="num">3</span></div>
+    <div class="day-meta">
+      <h2>Hospitality procedure</h2>
+      <p>Žalbe gostiju, situacije, direktne rezervacije, recenzije, vlasnici i susjedi</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.1 APARTMANI vs VILLE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.1</div>
+    <h3>Dva svijeta komunikacije — apartmani vs. ville i resorti</h3>
+    <p>Prije nego krenemo na konkretne situacije, ključno je razumjeti da postoje <strong>dva različita pristupa komunikaciji</strong> s gostima, ovisno o tipu objekta.</p>
+
+    <div class="compare-grid">
+      <div class="compare-box box-apt">
+        <h5>🏢 Apartmani (Irundo, CRA, Sunny, DU Homes, Beč)</h5>
+        <p>Komunikacija je <strong>efikasna, jasna i template-bazirana</strong>. Procedure su izbrusene do detalja.</p>
+        <ul>
+          <li>Koristimo <strong>gotove template poruke</strong> za sve standardne situacije (Nuclino + WA templatesi)</li>
+          <li>Ton je profesionalan, prijateljski i kratak</li>
+          <li>Self check-in je standard — većina gostiju dolazi i odlazi bez osobnog kontakta</li>
+          <li>Komunikacija uglavnom putem WA, extraneta i maila</li>
+          <li>Fokus na brzinu odgovora i točnost informacija</li>
+          <li>Standardni follow-up flow: reminder → kodovi → check-in → before CO → CO</li>
+        </ul>
+      </div>
+      <div class="compare-box box-villa">
+        <h5>🏡 Ville i resorti (Palms Resort, individualne ville)</h5>
+        <p>Komunikacija je <strong>personaliziranija i luksuznije orijentirana</strong>. Gosti očekuju premium doživljaj.</p>
+        <ul>
+          <li><strong>Manje templatea</strong> — poruke se prilagođavaju gostu i situaciji</li>
+          <li>Ton je topliji, detaljniji i više "concierge" stila</li>
+          <li>Često imamo <strong>host na lokaciji</strong> koji osobno dočekuje goste</li>
+          <li>Komunikacija uključuje i dogovor oko dodatnih usluga (čišćenje, izleti, prijevoz)</li>
+          <li>Svaka vila ima <strong>svoju WA grupu</strong> s vlasnicima i timom</li>
+          <li>Veća pažnja na <strong>detalje</strong>: cvijeće, dobrodošlica, posebni zahtjevi</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <p><strong>💡 Zlatno pravilo:</strong> U apartmanima je efikasnost ključ — brz, točan odgovor prema templateu. U villama i resortima je personalizacija ključ — gost treba osjetiti da je poseban i da se o njemu brine tim koji ga poznaje.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.2 HOSPITALITY STANDARDI RECAP -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.2</div>
+    <h3>Hospitality standardi — podsjetnik</h3>
+    <p>Kao što si naučio/la na Dan 1, naš hospitality tim brine o gostima od potvrde rezervacije do odlaska. Evo ključnih pravila koja se primjenjuju u <strong>svim</strong> situacijama koje slijede:</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📏</span> Pravila koja uvijek vrijede</h4>
+      <ul>
+        <li><strong>Ton:</strong> Profesionalan, ali prijateljski i topao. Gost treba osjetiti ljudski pristup i brigu.</li>
+        <li><strong>Brzina:</strong> Odgovor u roku nekoliko minuta, max 30 min. Hitni slučajevi imaju apsolutni prioritet.</li>
+        <li><strong>Stil:</strong> Jasno, ljubazno, bez tehničkog žargona. Koristiti ime gosta kad je poznato.</li>
+        <li><strong>Radno vrijeme:</strong> 09:00–21:00, svaki dan.</li>
+        <li><strong>Naša poruka uvijek mora biti zadnja</strong> u razgovoru — na svim kanalima.</li>
+        <li><strong>Uvijek odmah reagirati</strong> — čak i ako ne možeš odmah riješiti problem, daj gostu do znanja da radiš na tome.</li>
+      </ul>
+    </div>
+
+    <div class="msg-template">
+      Dear #guestname,<br><br>
+      Thank you for reaching out to us. We are sorry for the inconvenience.<br>
+      We will forward your message to our local team and we will get back to you as soon as possible.<br><br>
+      If you have any other questions, do not hesitate to contact us.
+    </div>
+    <p style="font-size:0.82rem; color:var(--text-light); margin-top:4px; text-align:center;">↑ Univerzalni prvi odgovor kad trebaš vremena za rješenje</p>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.3 ŽALBE GOSTIJU -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.3</div>
+    <h3>Zahtjevi i žalbe gostiju — kako reagirati</h3>
+    <p>Ovo je najvažniji dio tvojeg posla. Svaka žalba mora biti ozbiljno shvaćena i brzo riješena. Evo najčešćih situacija:</p>
+
+    <div class="situation">
+      <h4>🧹 Apartman nije čist (djelomično ili u cijelosti)</h4>
+      <ul>
+        <li>Ispričati se gostima i zamoliti ih da <strong>pošalju fotografije</strong></li>
+        <li>Proslijediti u odgovarajuću WA grupu čišćenja i javiti čistačicama da <strong>odmah počiste</strong></li>
+        <li>Javiti gostima da će čistačica doći što je prije moguće — zamoliti za strpljenje i razumijevanje</li>
+      </ul>
+    </div>
+
+    <div class="situation border-orange">
+      <h4>🔧 Apartman nije funkcionalan (kvar, nešto ne radi)</h4>
+      <ul>
+        <li>Ispričati se gostima i zamoliti za <strong>fotografiju/video kao dokaz</strong></li>
+        <li><strong>Zagreb:</strong> Ako su manji kvarovi, otići osobno u apartman i popraviti</li>
+        <li><strong>Druge destinacije:</strong> Proslijediti u odgovarajuću WA grupu</li>
+        <li><strong>Rovinj (paušal apartmani):</strong> Javiti u grupu ili prodaji → poslati Milovana/Roberta</li>
+        <li>Prvo provjeriti <strong>Nuclino → Facility Procedure</strong> — možda postoji brzo rješenje koje možeš gostu objasniti telefonski</li>
+      </ul>
+    </div>
+
+    <div class="priority-box">
+      <h4>🚨 Prioriteti kvarova — od najhitnijeg</h4>
+      <ol>
+        <li><strong>Nema struje / vode / plina</strong> u apartmanu</li>
+        <li><strong>Ne radi grijanje / hlađenje</strong></li>
+        <li><strong>Ne radi elektronska brava za ulazak</strong> (ne pokazuje znakove života) → otvoriti vrata s posebnom baterijom — spustiti poklopac ispod touchscreena i dati kontakt na 2 točke</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">💡</span> Najčešći problemi — brza rješenja (objasni gostu telefonski)</h4>
+      <ul>
+        <li><strong>Touch pad svijetli za bateriju:</strong> vrata nisu dobro zatvorena</li>
+        <li><strong>Nema tople vode:</strong> upaliti bojler i pričekati 15–30 min</li>
+        <li><strong>Nema struje u pola apartmana:</strong> provjeriti main switch (ako postoji)</li>
+        <li><strong>Wi-Fi ne radi:</strong> ugasiti ruter, pričekati 5 min, upaliti</li>
+        <li><strong>TV ne radi:</strong> 2 daljinska — jednim upaliti prijamnik, drugim TV; Source → HDMI (1); programe mijenjati na uređaju za prijamnik</li>
+        <li><strong>Zvoni alarm:</strong> izaći i ponoviti postupak otvaranja brave; zamoliti gosta da koristi Open/Close gumb, ne fizički okretati elektronsku bravu</li>
+      </ul>
+    </div>
+
+    <div class="situation border-blue">
+      <h4>🏠 "To nije apartman koji sam rezervirao!"</h4>
+      <ul>
+        <li>Ispričati se i reći da ćeš <strong>provjeriti rezervaciju</strong></li>
+        <li>Provjeriti jesu li poslani točni kodovi i upute za pravi apartman</li>
+        <li>Provjeriti rezervaciju na Booking/Airbnb extranetu</li>
+        <li>Ako je gost dobio što je rezervirao → poslati <strong>screenshot iz extraneta</strong> i objasniti</li>
+        <li>Ako se i dalje žali → objasniti da je sam napravio rezervaciju, poslati dokaz i uputiti na Booking/Airbnb korisničku podršku</li>
+        <li>Ako i dalje inzistira → uputiti ga da nam <strong>putem maila</strong> izrazi mišljenje, prosljedit ćemo menadžmentu</li>
+      </ul>
+      <p style="margin-top:10px;font-size:0.82rem;color:var(--text-light);"><strong>Najčešće se događa za:</strong> RS1-3, DP1-3, Irundo Zagreb Downtown — gosti vide galeriju svih jedinica na početku Booking profila, pa misle da su rezervirali veći/skuplji apartman.</p>
+    </div>
+
+    <div class="situation border-green">
+      <h4>🛏️ Apartman nije dobro pripremljen (sofa, krevetić...)</h4>
+      <ul>
+        <li>Ispričati se i provjeriti kako je apartman namješten vs. za koliko je gostiju rezervacija</li>
+        <li><strong>Ako je za više gostiju nego namješteno:</strong> zamoliti da pogledaju u ormaru za posteljinu; ako je nema → poslati čistačice ili odnijeti osobno (Zagreb)</li>
+        <li><strong>Ako je namješteno za točan broj:</strong> objasniti i naplatiti <strong>dodatni ležaj (10–15€ po osobi/noć)</strong> putem Borgun linka; nakon uplate dostaviti posteljinu i ručnike; naplatiti boravišnu pristojbu za dodatne osobe</li>
+      </ul>
+    </div>
+
+    <div class="situation border-purple">
+      <h4>❌ Gost nije zadovoljan i želi otkazati</h4>
+      <ul>
+        <li>Uvijek komunicirati da ćemo morati primijeniti <strong>cancellation policy</strong> s kojim su bili upoznati prilikom rezerviranja</li>
+        <li>To vrijedi kad si utvrdio/la da je rezervacija originalna i ispravna</li>
+      </ul>
+    </div>
+
+    <div class="situation border-teal">
+      <h4>🚗 "Nemamo parking" / "Ne mogu doći autom"</h4>
+      <ul>
+        <li>Provjeriti što piše na Booking/Airbnb oglasu i što je rečeno gostu</li>
+        <li>Ako gost nije u pravu → objasniti i dokazati</li>
+        <li>Pješačka zona → objasniti da ne možemo utjecati, info je bio u check-in uputama i opisu</li>
+        <li><strong>Rovinj:</strong> Predložiti golf autić uz dodatnu naknadu</li>
+        <li><strong>Dubrovnik:</strong> Predložiti uslugu nošenja prtljage uz naknadu</li>
+      </ul>
+    </div>
+
+    <div class="warning-box">
+      <p><strong>⚠️ Refundovi i popusti — TKO odobrava?</strong> Direktori, Prodaja, vlasnik (za fee apartmane), ili Matea (senior HC koordinator). Gostu uvijek javi da ćeš se javiti u najkraćem roku i da si proslijedio/la poruku menadžmentu. <strong>Ništa nije panika i sve može čekati do ponedjeljka.</strong></p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.4 SITUACIJE S GOSTIMA -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.4</div>
+    <h3>Česte situacije s gostima</h3>
+
+    <div class="situation">
+      <h4>📍 Različite adrese za istu rezervaciju (grupa)</h4>
+      <ul>
+        <li>Napomenuti gostu da se apartmani nalaze na <strong>različitim adresama</strong>, ali svi su u neposrednoj blizini</li>
+        <li>Uputiti na self check-in upute koje su dobili mailom</li>
+        <li>Google Maps linkovi i karta su u welcome mailu i reminder poruci</li>
+      </ul>
+    </div>
+
+    <div class="situation border-orange">
+      <h4>🚬 Pušenje u apartmanu</h4>
+      <ul>
+        <li>Svi apartmani su <strong>nepušački</strong> — pušenje dozvoljeno samo na balkonu</li>
+        <li>Ako se gost žali na miris dima → ispričati se, uključiti ventilaciju, otvoriti prozore, koristiti osvježivač</li>
+        <li>Ako postoji dokaz da je prethodni gost pušio → pokušati naplatiti <strong>smoking fee</strong> putem platforme</li>
+      </ul>
+    </div>
+
+    <div class="situation border-blue">
+      <h4>⏰ Gost je ispred apartmana (rani/kasni dolazak)</h4>
+      <ul>
+        <li><strong>Prije 15:00:</strong> Provjeriti rezervaciju u Rentliu, uputiti na self check-in upute, poslati Early Check-in template, preporučiti luggage storage; kodovi idu u 15:00</li>
+        <li><strong>U 15:00 ili kasnije:</strong> Uputiti na kodove koji su poslani, provjeriti jesu li ispravni, zamoliti da jave kad uđu</li>
+      </ul>
+    </div>
+
+    <div class="situation border-green">
+      <h4>⬆️ Gost traži upgrade</h4>
+      <ul>
+        <li><strong>Najbolje je NE odobravati zamjene</strong> jer su veliki trošak</li>
+        <li>Iznimno — provjeriti u HC grupi ima li raspoloživ apartman</li>
+        <li>Ako se gost prebacuje nakon boravka → naplatiti <strong>cleaning fee</strong> + javiti čistačicama</li>
+        <li>Ponuditi razliku u cijeni prema Rentlio izračunu → Borgun link za plaćanje</li>
+        <li>Nakon uplate: <strong>drag & drop</strong> rezervaciju u Rentliu u novi apartman</li>
+        <li>Ako ne prihvaća razliku → provjeriti s Upravom</li>
+      </ul>
+    </div>
+
+    <div class="situation border-purple">
+      <h4>🧴 Gost želi dodatne ručnike ili čišćenje</h4>
+      <ul>
+        <li><strong>Ručnici:</strong> Početni set = 2 mala + 2 velika po gostu (uključeno). Sve dodatno se naplaćuje → template "Additional" → Borgun link → račun u Rentliu (PDV 25%) → javiti u WA grupu za dostavu</li>
+        <li><strong>Čišćenje:</strong> Naplaćuje se prema cjeniku (cleaning fee, puna cijena). Iznimka: boravci 10+ dana. Dogovoriti termin s gostom i čistačicama.</li>
+      </ul>
+    </div>
+
+    <div class="situation border-teal">
+      <h4>👶 Dječji krevetić (Kinderbet)</h4>
+      <ul>
+        <li><strong>Rezervirano unaprijed:</strong> Trebalo bi pisati u napomeni — vidljivo čistačicama u rasporedu. Ako nije namješten → zamoliti čistačice ili osobno namjestiti.</li>
+        <li><strong>Rezervirano na dan check-ina:</strong> Objasniti da je krevetić na zahtjev i da ne možemo garantirati dostupnost isti dan; ako stignemo, osobno namjestiti.</li>
+        <li><strong>Nisu najavili:</strong> Objasniti da je krevetić na zahtjev te da zahtjev nismo dobili. Broj djece 0–12 NE znači automatsku rezervaciju krevetića.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.5 SITUACIJE S REZERVACIJAMA -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.5</div>
+    <h3>Situacije s rezervacijama</h3>
+
+    <div class="situation">
+      <h4>🔄 Overbooking</h4>
+      <ul>
+        <li><strong>Odmah javiti Prodaji</strong> (Veroniki, Martini ili ZG grupu)</li>
+        <li>Prodaja daje odobrenje za alternativni smještaj — ponuditi <strong>istu ili višu kategoriju</strong></li>
+        <li>Paziti: ako originalan apartman ima balkon, novi mora imati balkon (inače je downgrade!)</li>
+        <li><strong>Ako imamo samo downgrade:</strong> Obavijestiti goste, ponuditi nižu kategoriju po nižoj cijeni, napraviti modifikaciju cijene na portalu</li>
+        <li><strong>Ako nemamo ništa:</strong> Zatražiti otkaz rezervacije, ispričati se gostu — OTA kanali naplaćuju penale</li>
+        <li>Administracija: drag & drop u Rentliu + javiti update prodaji</li>
+      </ul>
+    </div>
+
+    <div class="situation border-orange">
+      <h4>🐾 Kućni ljubimci (Pets)</h4>
+      <table class="proc-table" style="margin-top:12px;">
+        <thead><tr><th>Lokacija</th><th>Pravila</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Irundo</strong></td><td>Zabranjeni. Iznimka za boravke 10+ dana — odobrenje daje Specijalist ili Direktor.</td></tr>
+          <tr><td><strong>CRA</strong></td><td>Dozvoljeni u pojedinim objektima. Naplatiti Pet Fee prema internom cjeniku.</td></tr>
+          <tr><td><strong>Sunny</strong></td><td>Provjeriti dokument s pravilima.</td></tr>
+          <tr><td><strong>Ville</strong></td><td>Provjeriti za svaku pojedinačno.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="situation border-blue">
+      <h4>👧 Djeca u apartmanima — pravila po dobi</h4>
+      <table class="proc-table" style="margin-top:12px;">
+        <thead><tr><th>Dob</th><th>Ležaj</th><th>Boravišna</th><th>eVisitor</th></tr></thead>
+        <tbody>
+          <tr><td><strong>0–3 god.</strong></td><td>Pravo na kinderbet (na zahtjev). U komentaru: "OBAVEZNO KINDERBET"</td><td>Ne plaća</td><td>Poželjno prijaviti</td></tr>
+          <tr><td><strong>3–5/6 god.</strong></td><td>Free of charge u postojećem krevetu. Ne stanu u kinderbet.</td><td>Ne plaća</td><td>Poželjno prijaviti</td></tr>
+          <tr><td><strong>5/6–12 god.</strong></td><td>Zahtjeva svoj ležaj — naplaćujemo 10–15€/noć/osoba</td><td>Ne plaća</td><td>Poželjno prijaviti</td></tr>
+          <tr><td><strong>12–18 god.</strong></td><td>Ležaj kao adult — 10–15€/noć/osoba</td><td>Pola cijene za odraslog</td><td>Poželjno prijaviti</td></tr>
+        </tbody>
+      </table>
+      <div class="info-box" style="margin-top:12px;">
+        <p><strong>ℹ️ Važno:</strong> Provjeriti za svaku rezervaciju sa označenim Infant/Child u Extranetu — tako saznajemo dob djeteta i treba li kinderbet + boravišna.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.6 DIREKTNE REZERVACIJE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.6</div>
+    <h3>Prodaja — direktne rezervacije</h3>
+    <p>Upiti koji dolaze putem maila, poziva ili weba. Generalno pravilo: sve upite usmjeravamo na <strong>www.irundo.com</strong> i Rentlio Booking Engine.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">🌐</span> Rentlio Booking Engine (RBE) — web rezervacije</h4>
+      <ul>
+        <li>Goste usmjeriti na <strong>www.irundo.com → Rezerviraj smještaj</strong> → odaberi grad i datume</li>
+        <li>Ako gost ne može sada na web, koordinator može telefonski/mailom ponuditi smještaj</li>
+        <li>Ako pitaju za parking → provjeriti raspoloživost Irundo Zagreb City Apartments u Rentliu</li>
+        <li>Podaci o kartici koje gost upiše <strong>neće se koristiti za plaćanje!</strong></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">💳</span> Kad gost rezervira putem RBE</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-text">Rezervacija dobije kanal <strong>"Rentlio Booking Engine"</strong> — označena zelenom + znakom R. Email oznaka: RENTLIO DIREKTNE!!</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-text"><strong>Odmah slati Borgun link</strong> za smještaj bez obzira na datum dolaska (+ boravišna pristojba ako se naplaćuje) + uvjeti otkazivanja. Pitati treba li R1 račun.</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-text">Nakon potvrde uplate: <strong>fiskalizirani račun</strong> (kartica) ili R1 račun (tvrtka: ime, adresa, OIB/VAT). Označiti kao plaćeno + napomena u rezervaciji.</div>
+        </div>
+      </div>
+      <div class="warning-box" style="margin-top:12px;">
+        <p><strong>⚠️ Rokovi naplate:</strong> 48h za rezervacije izvan cancellation perioda. 1h za rezervacije unutar CP-a (5 dana ili manje do check-ina).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🏦</span> Direktne — plaćanje po ponudi / virmanski</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-text">Provjeriti s nadležnima (Prodaja/Igor) je li <strong>transakcijsko plaćanje odobreno</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-text">Napraviti rezervaciju u Rentliu → izdati <strong>ponudu (proforma)</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-text">Poslati ponudu gostu + napomena da uplatu izvrši u <strong>48h</strong> i pošalje potvrdu</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+          <div class="step-text">Podsjetnik za 48h (vikend → utorak). Kontaktirati Igora za provjeru uplate.</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">5</div></div>
+          <div class="step-text">Kad uplata sjede: <strong>transakcijski nefiskalizirani račun</strong> → označiti plaćeno → napomena "plaćeno po ponudi" → evidencija u blagajni (tag Igor)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fde8e8;color:#c0392b;">📋</span> Naplata direktnih — kontroling i računi</h4>
+      <div class="steps">
+        <div class="step">
+          <div class="step-line"><div class="step-num">1</div><div class="step-connector"></div></div>
+          <div class="step-text">Naplatiti putem <strong>Borgun linka</strong> na ukupni iznos</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">2</div><div class="step-connector"></div></div>
+          <div class="step-text">Poslati template email s informacijama o plaćanju + potvrda</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">3</div><div class="step-connector"></div></div>
+          <div class="step-text">Napomena u kalendar: <strong>48h</strong> (standard) ili <strong>1h</strong> (non-refundable)</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">4</div><div class="step-connector"></div></div>
+          <div class="step-text">Provjera uplate → ako nema, reminder → ako nema odgovora, <strong>otkazati rezervaciju</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">5</div><div class="step-connector"></div></div>
+          <div class="step-text">Kad plati: <strong>avansni račun</strong> (fiskalizirani za karticu, nefiskalizirani za transakciju)</div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">6</div><div class="step-connector"></div></div>
+          <div class="step-text">Na dan check-outa: <strong>storno avansa → konačni račun</strong></div>
+        </div>
+        <div class="step">
+          <div class="step-line"><div class="step-num">7</div></div>
+          <div class="step-text">Sve račune i storna pohraniti u <strong>Drive folder</strong> (Direktne rezervacije / Računi)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.7 RECENZIJE -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.7</div>
+    <h3>Odgovaranje na recenzije</h3>
+
+    <div class="compare-grid">
+      <div class="compare-box box-apt">
+        <h5>📘 Booking.com recenzije</h5>
+        <ul>
+          <li>Poželjno odgovoriti na <strong>sve recenzije</strong></li>
+          <li>Prioritetno: <strong>loše</strong> i <strong>najbolje</strong> recenzije</li>
+          <li>Dati do znanja ako gosti nisu u pravu, ali uvažiti feedback</li>
+          <li><strong>Postupak:</strong> Kopiraj recenziju s ocjenom i imenom → zalijepi u ChatGPT → provjeri odgovor → zalijepi na OTA kanal</li>
+        </ul>
+      </div>
+      <div class="compare-box box-villa">
+        <h5>📕 Airbnb recenzije</h5>
+        <p><strong>Naša recenzija gostu:</strong></p>
+        <ul>
+          <li>Pišemo svim gostima svako nekoliko dana ili kad stigne reminder</li>
+          <li>Svima (osim oznaka zvjezdicom) pišemo <strong>dobre recenzije s max ocjenom</strong></li>
+          <li>Zvjezdica = gost koji je radio probleme → pitati HC tim pa napisati recenziju</li>
+        </ul>
+        <p style="margin-top:8px;"><strong>Recenzija gosta za nas:</strong></p>
+        <ul>
+          <li>U before CO/CO porukama <strong>pitamo je li sve ok</strong></li>
+          <li>Aktivno potičemo dobre recenzije</li>
+          <li>Ako je recenzija uvredljiva/neutemeljena → šaljemo request za uklanjanje</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.8 VLASNICI I SUSJEDI -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.8</div>
+    <h3>Situacije s vlasnicima i susjedima</h3>
+
+    <div class="situation border-green">
+      <h4>🏠 Vlasnik želi pregledati apartman</h4>
+      <ul>
+        <li>Može pregledati <strong>samo kada je apartman slobodan</strong> (bez gostiju)</li>
+        <li>Preporučuje se da se najavi P&S timu prije dolaska</li>
+        <li>Po potrebi obavijestiti HC koordinatore i čistačice za otključavanje/pripremu</li>
+      </ul>
+    </div>
+
+    <div class="situation border-orange">
+      <h4>😤 Vlasnik se žali na stanje apartmana</h4>
+      <ul>
+        <li>Odmah obavijestiti HC tim i čistačice</li>
+        <li>Dokumentirati stanje (slike, opis)</li>
+        <li>Ako je potrebno, uključiti P&S za daljnju komunikaciju s vlasnikom</li>
+      </ul>
+    </div>
+
+    <div class="situation border-blue">
+      <h4>🔊 Susjedi se žale na buku</h4>
+      <ul>
+        <li>Gosti su upoznati s <strong>kućnim redom</strong> (info mapa + check-in upute)</li>
+        <li>Ljubazno se ispričati susjedima, objasniti da su gosti upoznati s pravilima</li>
+        <li>Upozoriti goste ponovno na kućni red</li>
+        <li>Ako susjedi ponovno zovu ili prijete policijom → <strong>mogu kontaktirati policiju</strong> jer kontrola ponašanja gostiju nije u našoj nadležnosti</li>
+        <li>Provjeriti u Rentliu jesu li gosti prijavljeni, zabilježiti sve i obavijestiti HC tim</li>
+      </ul>
+    </div>
+
+    <div class="situation border-purple">
+      <h4>🔨 Susjedi se žale na oštećenje</h4>
+      <ul>
+        <li>Ispričati se, utvrditi imaju li dokaze da je oštećenje uzrokovano našim gostima</li>
+        <li>Dokumentirati (fotografije, opis)</li>
+        <li>Obavijestiti vlasnika i/ili Prodaju</li>
+        <li>Po potrebi koordinirati popravak ili sanaciju štete</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- 3.9 PRIPREMA APARTMANA ZA SEZONU -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="section-label">Modul 3.9</div>
+    <h3>Priprema apartmana za sezonu / otvaranje nakon preuzimanja</h3>
+    <p>Kada se apartman priprema za sezonu ili nakon preuzimanja novog objekta, postoji detaljan postupak:</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">🔍</span> Checklista za pripremu apartmana</h4>
+      <ul>
+        <li><strong>Provjetravanje:</strong> Ako je vani sunčano/bez padalina — nekoliko dana, više sati dnevno</li>
+        <li><strong>Pregled stanja:</strong> Silikoni u kupaonici, mrlje po namještaju/tekstilu/podovima/zidovima</li>
+        <li><strong>Funkcionalnost:</strong> Internet & TV, grijanje/hlađenje, el. brava/key locker, rasvjeta, dovod/odvod vode, kuhinjski aparati, prozori i rolete</li>
+        <li><strong>Kuhinjski pribor:</strong> Uvijek 50% više od osnovnog broja ležaja</li>
+        <li><strong>Posteljina i ručnici:</strong> Svaki apartman mora imati <strong>x3 količinu</strong> (potpuno ispravnih) u odnosu na br. osnovnih ležajeva</li>
+        <li><strong>Inventura sredstava:</strong> Kemikalije, krpe, metle, mopovi, usisavači + potrošni materijal (šamponi, WC papir, čaj, kava, šećer)</li>
+        <li><strong>Detaljno čišćenje:</strong> Sve površine (vanjske i unutarnje), prozori obje strane, čisti prekrivači i navlake</li>
+        <li><strong>Finalni supervisor:</strong> Provjeriti sve s popisa; ako gosti dolaze taj dan → upaliti grijanje/hlađenje i ambijentalna svjetla; za bolje apartmane kupiti cvijeće (u komunikaciji s Prodajom)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!-- CHECKLIST -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section">
+    <div class="checklist">
+      <h4>✅ Checklista za Dan 3</h4>
+      <p style="color:var(--text-sec);font-size:0.86rem;margin-bottom:16px;">Mentor provjerava razumijevanje ovih točaka:</p>
+      <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">Razumijem razliku u komunikaciji: apartmani (template-bazirano) vs. ville (personalizirano)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Znam prvi odgovor gostu dok radim na rješenju ("We will forward your message...")</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Znam postupak za žalbu na čistoću — tražiti slike → WA grupa → čistačice odmah</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Znam prioritete kvarova (struja/voda > grijanje > brava) i brza rješenja za najčešće probleme</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Znam postupak kad gost tvrdi "to nije moj apartman" — screenshot iz extraneta</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Znam tko odobrava refundove i popuste (direktori, Prodaja, vlasnik, Matea)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Razumijem overbooking proceduru — javiti Prodaji, ista/viša kategorija, paziti na balkon</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Znam pravila za kućne ljubimce po lokacijama i djecu po dobnim skupinama</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c9"><label for="c9">Znam obraditi RBE rezervaciju — Borgun link odmah, rokovi naplate, avansni račun</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c10"><label for="c10">Znam odgovoriti na recenzije (Booking: ChatGPT draft → provjeri; Airbnb: mi pišemo gostu + potičemo dobre)</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c11"><label for="c11">Znam postupak za situacije s vlasnicima i susjedima</label></div>
+      <div class="checklist-item"><input type="checkbox" id="c12"><label for="c12">Razumijem checklistu za pripremu apartmana za sezonu</label></div>
+    </div>
+  </div>
+
+  <div class="tip-box" style="text-align:center;margin-top:40px;">
+    <p><strong>🎯 Sutra te čeka Dan 4:</strong> Housekeeping procedure i Facility procedure — čišćenje, SOP, logistika posteljine, popravci i maintenance koordinacija.</p>
+  </div>
+
+</main>
+
+<footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 3 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
+</body>
+</html>
