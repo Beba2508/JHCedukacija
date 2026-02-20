@@ -16,7 +16,7 @@
   .site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}
   .site-header-nav a:hover{color:var(--text)}
   .day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
-  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2025/11/IMG_4898-1-1.jpg') center 40%/cover no-repeat;position:relative}
+  .hero-image{width:100%;height:340px;background-color:#e8edf2;background:url('https://irundo.com/wp-content/uploads/2025/11/IMG_4898-1-1.jpg') center 40%/cover no-repeat;position:relative}
   .hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
   .hero{padding:40px 48px 32px}
   .hero-inner{max-width:880px;margin:0 auto}
@@ -106,6 +106,7 @@
   .footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
   .footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
   .footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  .day-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;margin-top:48px;border-top:1px solid var(--border)}.day-nav a{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--text-sec);padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;text-decoration:none}.day-nav a:hover{border-color:var(--red);color:var(--red);background:rgba(217,79,92,.04)}.day-nav .spacer{flex:1}.day-switcher{position:relative;display:inline-block}.day-switcher select{appearance:none;-webkit-appearance:none;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 28px 5px 10px;font-size:.72rem;font-weight:600;color:var(--text-sec);cursor:pointer;font-family:inherit}.day-switcher select:hover{border-color:var(--red)}.day-switcher::after{content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--text-light);pointer-events:none}
   @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.values-grid,.tools-grid{grid-template-columns:1fr}.day-header{flex-direction:column;gap:10px}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
   @media print{.site-header,.progress-bar{display:none}body{background:#fff}.card,.value-card{break-inside:avoid}}
 </style>
@@ -113,7 +114,7 @@
 <body>
 <header class="site-header">
   <img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo">
-  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 1 od 7</span></nav>
+  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-switcher"><select onchange="if(this.value)window.location=this.value"><option value="">Idi na dan...</option><option value="index.html">Index</option><option value="Irundo_HC_Prirucnik_Dan1.html" selected>Dan 1: Uvod i alati</option><option value="Irundo_HC_Prirucnik_Dan2.html">Dan 2: Svakodnevni workflow</option><option value="Irundo_HC_Prirucnik_Dan3.html">Dan 3: Hospitality procedure</option><option value="Irundo_HC_Prirucnik_Dan4.html">Dan 4: Housekeeping <span class="day-indicator">Dan 1 od 7</span> Facility</option><option value="Irundo_HC_Prirucnik_Dan5.html">Dan 5: Villas <span class="day-indicator">Dan 1 od 7</span> Arena</option><option value="Irundo_HC_Prirucnik_Dan6.html">Dan 6: Praksa + Računi</option><option value="Irundo_HC_Prirucnik_Dan7.html">Dan 7: Evaluacija</option></select></span><span class="day-indicator">Dan 1 od 7</span></nav>
 </header>
 <div class="hero-image"></div>
 <section class="hero"><div class="hero-inner">
@@ -145,7 +146,38 @@
     </div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.2</div><h3>Naše temeljne vrijednosti</h3><p>Tri stupa na kojima gradimo svako gostinsko iskustvo:</p>
+  <div class="section"><div class="section-label">Modul 1.2</div><h3>👥 Tko što radi — timovi i ljudi</h3><p>Irundo je mali ali efikasan tim. Evo tko radi što i kome se obratiti:</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">💼</span> P&S — Sales & Portfolio tim</h4>
+      <p>Trenutno u timu: <strong>Martina, Veronika i Petra</strong></p>
+      <ul>
+        <li>Ugovaranje novih apartmana i komunikacija s vlasnicima</li>
+        <li>Priprema ugovora, kreiranje i slanje ponuda</li>
+        <li>Postavljanje cijena smještaja i dizanje oglasa na OTA kanale</li>
+        <li>Postavljanje računa i objekata u Rentliu</li>
+        <li>Pronalaženje i kontaktiranje novih vlasnika koji zadovoljavaju Irundo kriterije</li>
+        <li>Pregledavanje apartmana i onboarding novih smještajnih jedinica u sustav</li>
+      </ul>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">🎧</span> HC — Hospitality Coordination (mi!)</h4>
+      <p>Ovo je tvoj tim. HC koordinator pokriva sve operativno:</p>
+      <ul>
+        <li><strong>Pre / during / post stay</strong> komunikacija s gostima na svim kanalima</li>
+        <li>Koordinacija čistačica, majstora, hostova i lokalnih timova</li>
+        <li>Administracija vezana za rezervacije i hospitality</li>
+        <li>Implementacija novih sustava u procese</li>
+        <li>Izrada materijala za goste i lokalne timove (self upute, info mape...)</li>
+        <li>Kontrola tablica čišćenja i obračuni čišćenja</li>
+      </ul>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🧹</span> Vanjski servisi</h4>
+      <p>Nisu zaposlenici Irunda — pružaju usluge čišćenja, popravaka i održavanja po ugovoru. Svaka destinacija ima svoje servise, a mi koordiniramo njihov rad.</p>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fde8e8;color:var(--red);">👔</span> Igor i Tomislav — direktori</h4>
+      <p>Osnivači i direktori firme. Uključeni su u strateške odluke, ville i veće operativne situacije. <strong>Kontaktiraj ih samo kad stvarno zapne</strong> — hitne situacije, eskalacije, odobrenja troškova. Za sve ostalo prvo provjeri s HC timom ili mentorom.</p>
+    </div>
+  </div>
+
+  <div class="section"><div class="section-label">Modul 1.3</div><h3>Naše temeljne vrijednosti</h3><p>Tri stupa na kojima gradimo svako gostinsko iskustvo:</p>
     <div class="values-grid">
       <div class="value-card"><span class="emoji">🏠</span><h5>Centar avanture</h5><p>Svi naši stanovi nalaze se na top lokacijama, u samom centru gradova i blizu svih bitnih lokalnih znamenitosti.</p></div>
       <div class="value-card"><span class="emoji">✨</span><h5>Čisto i profesionalno</h5><p>Posebnu pažnju poklanjamo čistoći. Kupaonice, posteljina, ručnici, šamponi — sve mora biti besprijekorno.</p></div>
@@ -153,7 +185,7 @@
     </div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.3</div><h3>Irundo portfolio — naše destinacije</h3><p>Irundo upravlja raznolikim portfeljem apartmana, vila i partnerskih objekata:</p>
+  <div class="section"><div class="section-label">Modul 1.4</div><h3>Irundo portfolio — naše destinacije</h3><p>Irundo upravlja raznolikim portfeljem apartmana, vila i partnerskih objekata:</p>
     <table class="portfolio-table"><thead><tr><th>Destinacija</th><th>Brendovi / napomene</th><th>Jed.</th><th>Regija</th></tr></thead><tbody>
       <tr><td><strong>Zagreb</strong></td><td>Irundo Zagreb</td><td>32</td><td><span class="badge badge-hr">HR</span></td></tr>
       <tr><td><strong>Rovinj</strong></td><td>CRA + Irundo Rovinj</td><td>82</td><td><span class="badge badge-hr">HR</span></td></tr>
@@ -170,7 +202,7 @@
     <div class="tip-box"><p><strong>💡 Za zapamtiti:</strong> Najveći portfelj je u Dubrovniku (93 jed. ukupno — Irundo DBV + DU Homes), zatim Rovinju (82 jed.). Sales & Portfolio tim kontinuirano radi na širenju portfelja, tako da uvijek dolazi do dodavanja novih destinacija i objekata. Detalje možeš vidjeti u Nuclinu pod "4-PORTFOLIO".</p></div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.4</div><h3>Alati koje koristimo u svakodnevnom radu</h3><p>Ovo su tvoji glavni radni alati:</p>
+  <div class="section"><div class="section-label">Modul 1.5</div><h3>Alati koje koristimo u svakodnevnom radu</h3><p>Ovo su tvoji glavni radni alati:</p>
     <div class="tools-grid">
       <div class="tool-card primary"><h5>🏨 Rentlio</h5><p>PMS — centralni alat za upravljanje rezervacijama, kalendarima, cijenama, gostima i fakturiranjem.</p></div>
       <div class="tool-card secondary"><h5>📖 Nuclino</h5><p>Baza znanja i interna dokumentacija. Sve procedure, SOP-ovi, upute i templatesi. Tvoj "priručnik za sve".</p></div>
@@ -182,7 +214,7 @@
     <div class="tip-box"><p><strong>💡 Napomena:</strong> Svi alati su već ulogirani na radnom računalu — ne trebaš se posebno prijavljivati. HC tim koristi zajedničke accounte. Samo otvori aplikaciju i kreni raditi.</p></div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.5</div><h3>Hospitality standardi — kako komuniciramo s gostima</h3><p>Naš hospitality tim brine o gostima od trenutka potvrde rezervacije do njihova odlaska.</p>
+  <div class="section"><div class="section-label">Modul 1.6</div><h3>Hospitality standardi — kako komuniciramo s gostima</h3><p>Naš hospitality tim brine o gostima od trenutka potvrde rezervacije do njihova odlaska.</p>
     <div class="standards-grid">
       <div class="standard-item"><div class="standard-icon">🗣️</div><div class="standard-content"><h5>Ton komunikacije</h5><p>Profesionalan, ali prijateljski i topao. Gosti trebaju osjetiti ljudski pristup i brigu.</p></div></div>
       <div class="standard-item"><div class="standard-icon">⏱️</div><div class="standard-content"><h5>Dostupnost</h5><p>Svaki dan od 09:00 do 21:00 putem e-maila, poruka (SMS, WhatsApp, Extranet chatova) i telefona.</p></div></div>
@@ -202,7 +234,7 @@
     <div class="tip-box"><p><strong>💡 Zlatno pravilo:</strong> Cilj je stvoriti osjećaj povjerenja, profesionalnosti i topline — svaki gost treba znati da iza komunikacije stoji pravi tim koji brine o njegovom boravku.</p></div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.6</div><h3>Coordination procedure — kako funkcionira tim</h3><p>Koordinacijski tim svakodnevno komunicira s lokalnim timovima, čistačicama i majstorima.</p>
+  <div class="section"><div class="section-label">Modul 1.7</div><h3>Coordination procedure — kako funkcionira tim</h3><p>Koordinacijski tim svakodnevno komunicira s lokalnim timovima, čistačicama i majstorima.</p>
     <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">💬</span> Komunikacija = WhatsApp</h4><p>Sva komunikacija unutar tima odvija se putem WhatsAppa i WhatsApp grupa (po lokaciji ili funkciji).</p>
       <ul><li><strong>Grupe za čišćenje</strong> (npr. "Čišćenje ZG", "Čišćenje DBV", "Čišćenje CRA") — dnevni rasporedi, zadaci, posebni zahtjevi</li><li><strong>Grupe za ville</strong> — svaka vila ima svoju grupu s vlasnicima, Igorom, Tomislavom, prodajom i HC koordinatorima</li></ul>
     </div>
@@ -218,7 +250,7 @@
     <div class="card" style="margin-top:16px;"><h4><span class="icon" style="background:#f0e8fd;color:#8e44ad;">📊</span> Evidencija i praćenje</h4><p>Sve aktivnosti (popravci, troškovi, zamjene) evidentiraju se u Google Sheets. Nakon svakog većeg popravka potrebno je fotografirati i poslati u WhatsApp grupu kao potvrdu.</p></div>
   </div>
 
-  <div class="section"><div class="section-label">Modul 1.7</div><h3>Tvoja uloga — što radi HC koordinator</h3><p>HC koordinator je srce svakodnevnog operativnog procesa. Pregled odgovornosti koje ćeš savladati:</p>
+  <div class="section"><div class="section-label">Modul 1.8</div><h3>Tvoja uloga — što radi HC koordinator</h3><p>HC koordinator je srce svakodnevnog operativnog procesa. Pregled odgovornosti koje ćeš savladati:</p>
     <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📋</span> Dnevni zadaci (naučit ćeš na Dan 2)</h4>
       <ul><li>Izrada računa i fiskalizacija</li><li>Izrada aktivacijskih kodova po destinacijama</li><li>Izrada Borgun/Worldline payment linkova</li><li>Slanje check-out poruka gostima</li><li>Priprema reminder poruka za sutrašnje dolaske</li><li>Slanje kodova (Rentlio, WhatsApp, Extraneti)</li><li>Izrada rasporeda čišćenja po destinacijama i za ville</li><li>Popodnevna provjera kodova i dolazaka</li><li>Prijava gostiju u eVisitor</li></ul>
     </div>
@@ -230,16 +262,70 @@
     </div>
   </div>
 
+  <div class="section"><div class="section-label">Modul 1.9</div><h3>📌 Što ćeš još raditi — zadaci izvan dnevnog workflowa</h3><p>Osim svakodnevnih zadataka iz kalendara, HC koordinator radi i na zadacima koji se pojavljuju periodično ili po potrebi. Ove stvari ćeš učiti postepeno nakon osnovne edukacije:</p>
+    <div class="card"><h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">🔑</span> Izrada self uputa</h4>
+      <p>Self upute su dokumenti/poruke s detaljnim uputama za ulazak u apartman — kodovi, lokacija, parking, Wi-Fi, kućni red. Izrađuju se za svaki novi apartman i ažuriraju kad se nešto promijeni (npr. nova brava, nova šifra).</p>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#e8fde8;color:#27ae60;">🗺️</span> Izrada info mapa</h4>
+      <p>Info mape su digitalni ili printani vodiči za goste s informacijama o apartmanu i okolici — kako koristiti perilicu, najbliži supermarket, restorani, javni prijevoz, hitni kontakti. Izrađuju se za svaki novi objekt.</p>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🏠</span> Preuzimanje novih apartmana</h4>
+      <p>Kad P&S tim ugovori novi apartman, HC sudjeluje u operativnom preuzimanju — upoznavanje s prostorom, postavljanje kodova, fotografiranje za self upute, koordinacija s čistačicama za prvi cleaning, kreiranje WA grupa.</p>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#f0e8fd;color:#8e44ad;">📊</span> Controlling računa</h4>
+      <p>Periodična kontrola izdanih računa — provjera da su svi check-outi fakturirani, da iznosi odgovaraju, da su BP naplaćene. Radi se obično jednom tjedno ili po potrebi.</p>
+    </div>
+    <div class="card"><h4><span class="icon" style="background:#fde8e8;color:var(--red);">📋</span> Obračuni čišćenja</h4>
+      <p>Mjesečni obračuni prema servisima za čišćenje — provjera broja odrađenih čišćenja, usklađivanje s evidencijama, priprema za plaćanje.</p>
+    </div>
+    <div class="tip-box"><p><strong>💡</strong> Ove zadatke nećeš raditi od prvog dana — upoznat ćeš ih postupno kroz tjedne nakon edukacije. Za sada je bitno da znaš da postoje i da su dio tvoje uloge.</p></div>
+  </div>
+
+  <div class="section"><div class="section-label">Modul 1.10</div><h3>📖 Glossary — pojmovnik kratica</h3><p>U svakodnevnom radu koristimo hrpu kratica. Evo najvažnijih:</p>
+    <table class="portfolio-table"><thead><tr><th>Kratica</th><th>Značenje</th><th>Objašnjenje</th></tr></thead><tbody>
+      <tr><td><strong>CI</strong></td><td>Check-in</td><td>Dolazak gosta u apartman</td></tr>
+      <tr><td><strong>CO</strong></td><td>Check-out</td><td>Odlazak gosta iz apartmana</td></tr>
+      <tr><td><strong>KD</strong></td><td>Kasni dolazak</td><td>Gost dolazi nakon 21:00</td></tr>
+      <tr><td><strong>BP</strong></td><td>Boravišna pristojba</td><td>Turistička pristojba — naplaćuje se po osobi po noćenju</td></tr>
+      <tr><td><strong>CF</strong></td><td>Cleaning fee</td><td>Naknada za čišćenje — jednokratna po rezervaciji</td></tr>
+      <tr><td><strong>SELF</strong></td><td>Self check-in upute</td><td>Poruka s kodovima i uputama za ulazak koju šaljemo gostu</td></tr>
+      <tr><td><strong>NW</strong></td><td>Nema WhatsApp</td><td>Gost nema WA — šalji upute mailom ili SMS-om</td></tr>
+      <tr><td><strong>RBE</strong></td><td>Rentlio Booking Engine</td><td>Interna platforma za direktne rezervacije</td></tr>
+      <tr><td><strong>IBE</strong></td><td>Internet Booking Engine</td><td>Vlastiti booking sustav na irundo.com</td></tr>
+      <tr><td><strong>EVIS</strong></td><td>eVisitor</td><td>Sustav za prijavu turista — zakonska obaveza</td></tr>
+      <tr><td><strong>B.com</strong></td><td>Booking.com</td><td>Najveći OTA kanal za rezervacije</td></tr>
+      <tr><td><strong>OTA</strong></td><td>Online Travel Agency</td><td>Booking.com, Airbnb, Expedia — kanali prodaje</td></tr>
+      <tr><td><strong>PMS</strong></td><td>Property Management System</td><td>Rentlio — centralni sustav za upravljanje</td></tr>
+      <tr><td><strong>SOP</strong></td><td>Standard Operating Procedure</td><td>Standardizirani postupak za određeni zadatak</td></tr>
+      <tr><td><strong>P&S</strong></td><td>Portfolio & Sales</td><td>Tim za prodaju i ugovaranje novih objekata</td></tr>
+      <tr><td><strong>ABS</strong></td><td>Servis za čišćenje</td><td>Jedan od eksternih servisa za čišćenje (npr. za Arena apartmane)</td></tr>
+      <tr><td><strong>R1</strong></td><td>R1 račun</td><td>Račun s OIB-om za firme (pravne osobe)</td></tr>
+    </tbody></table>
+    <div class="card" style="margin-top:18px;"><h4><span class="icon" style="background:#fdf5e8;color:#e67e22;">🏷️</span> Kratice apartmana — kako ih čitati</h4>
+      <p>Svaki apartman ima šifru koja prati logiku: <strong>prvo slovo = grad</strong>, <strong>drugo slovo = ulica</strong>, <strong>broj = redoslijed ili random</strong>.</p>
+      <ul>
+        <li><strong>ZJ2</strong> → Zagreb, Jurišićeva, apartman 2</li>
+        <li><strong>ZP6</strong> → Zagreb, Petrinjska, apartman 6</li>
+        <li><strong>DT1</strong> → Dubrovnik, Tabakarija, apartman 1</li>
+        <li><strong>RS3</strong> → Rovinj, Švalba, apartman 3</li>
+        <li><strong>RB1</strong> → Rovinj, Bregovita, apartman 1</li>
+      </ul>
+      <p>Iznimke postoje (npr. SECRET, BEATRICE) — te ćeš naučiti s vremenom. Za sve nejasno provjeri u Nuclinu.</p>
+    </div>
+  </div>
+
   <div class="section"><div class="checklist"><h4>✅ Checklista za Dan 1</h4><p style="color:var(--text-sec);font-size:.84rem;margin-bottom:14px;">Na kraju prvog dana mentor provjerava:</p>
     <div class="checklist-item"><input type="checkbox" id="c1"><label for="c1">Znam destinacije i portfolio Irunda (gradovi, brendovi, broj jedinica)</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Razumijem svrhu svakog alata i kada se koji koristi</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Razumijem hospitality standarde — ton, brzina, kanali, follow-up</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Razumijem ulogu HC koordinatora i pregled odgovornosti</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Razumijem coordination procedure — WhatsApp grupe, popravci, evidencija</label></div>
-    <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Dodan/a sam u sve relevantne WhatsApp grupe</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c2"><label for="c2">Znam tko je u kojem timu i tko što radi (P&S, HC, direktori, vanjski servisi)</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c3"><label for="c3">Razumijem svrhu svakog alata i kada se koji koristi</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c4"><label for="c4">Razumijem hospitality standarde — ton, brzina, kanali, follow-up</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c5"><label for="c5">Razumijem ulogu HC koordinatora i pregled odgovornosti</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c6"><label for="c6">Razumijem coordination procedure — WhatsApp grupe, popravci, evidencija</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c7"><label for="c7">Znam čitati kratice apartmana (ZJ2, DT1, RS3...) i ostale kratice (CI, CO, BP, CF...)</label></div>
+    <div class="checklist-item"><input type="checkbox" id="c8"><label for="c8">Dodan/a sam u sve relevantne WhatsApp grupe</label></div>
   </div></div>
 
-  <div class="tip-box" style="text-align:center;margin-top:36px;"><p><strong>🎯 Sutra te čeka Dan 2:</strong> Svakodnevni workflow — kompletni dnevni raspored od 09:00 do 21:00, poruke, check-in/out, kodovi, tablice dolazaka i raspored čišćenja.</p></div>
+  <div class="day-nav"><a href="index.html">← Priručnik</a><div class="spacer"></div><a href="Irundo_HC_Prirucnik_Dan2.html">Dan 2 →</a></div>
 </main>
 <footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 1 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
 </body>
