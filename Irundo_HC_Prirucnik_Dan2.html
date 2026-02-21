@@ -16,7 +16,7 @@
   .site-header-nav a{font-size:.8rem;font-weight:500;color:var(--text-sec);transition:color .2s}
   .site-header-nav a:hover{color:var(--text)}
   .day-indicator{font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent-dark);padding:4px 14px;border:1px solid rgba(200,169,110,.3);border-radius:100px;background:rgba(200,169,110,.06)}
-  .hero-image{width:100%;height:340px;background:url('https://irundo.com/wp-content/uploads/2026/01/nerolika_main_A3988-1-scaled.jpg') center/cover no-repeat;position:relative}
+  .hero-image{width:100%;height:340px;background-color:#e8edf2;background:url('https://irundo.com/wp-content/uploads/2026/01/nerolika_main_A3988-1-scaled.jpg') center/cover no-repeat;position:relative}
   .hero-image::after{content:'';position:absolute;bottom:0;left:0;right:0;height:160px;background:linear-gradient(to top,var(--bg),transparent)}
   .hero{padding:40px 48px 32px}
   .hero-inner{max-width:880px;margin:0 auto}
@@ -116,6 +116,8 @@
   .footer-inner{max-width:880px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
   .footer-logo{font-family:'DM Serif Display',serif;font-size:1.2rem;color:#fff;margin-bottom:4px}
   .footer-tagline{font-style:italic;color:rgba(255,255,255,.45)}
+  .msg-example{background:#f0f4f0;border:1px solid #d4e4d4;border-radius:10px;padding:16px 20px;margin:12px 0;font-size:.82rem;line-height:1.8;color:var(--text);white-space:pre-line;font-family:inherit}.msg-example .msg-label{display:inline-block;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;padding:2px 8px;border-radius:4px;margin-bottom:8px}.msg-label-reminder{background:#3498db}.msg-label-co{background:#e67e22}.msg-label-self{background:#27ae60}.priority-card{background:var(--dark);border-radius:12px;padding:24px 28px;color:#fff;margin:20px 0}.priority-card h4{color:var(--accent);font-size:.88rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}.priority-card ol{list-style:none;padding:0;counter-reset:prio}.priority-card ol li{padding:8px 0 8px 36px;position:relative;color:rgba(255,255,255,.85);font-size:.86rem;counter-increment:prio;border-bottom:1px solid rgba(255,255,255,.08)}.priority-card ol li:last-child{border-bottom:none}.priority-card ol li::before{content:counter(prio);position:absolute;left:0;width:24px;height:24px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;top:8px}
+.day-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;margin-top:48px;border-top:1px solid var(--border)}.day-nav a{display:inline-flex;align-items:center;gap:6px;font-size:.82rem;font-weight:600;color:var(--text-sec);padding:10px 18px;border:1px solid var(--border);border-radius:8px;transition:all .2s;text-decoration:none}.day-nav a:hover{border-color:var(--red);color:var(--red);background:rgba(217,79,92,.04)}.day-nav .spacer{flex:1}.day-switcher{position:relative;display:inline-block}.day-switcher select{appearance:none;-webkit-appearance:none;background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:5px 28px 5px 10px;font-size:.72rem;font-weight:600;color:var(--text-sec);cursor:pointer;font-family:inherit}.day-switcher select:hover{border-color:var(--red)}.day-switcher::after{content:"▾";position:absolute;right:10px;top:50%;transform:translateY(-50%);font-size:.6rem;color:var(--text-light);pointer-events:none}
   @media(max-width:768px){.site-header{padding:14px 20px}.hero-image{height:200px}.hero{padding:28px 24px}.hero h1{font-size:2rem}.main{padding:32px 20px 60px}.timeline-left{width:40px}.template-table,.cleaning-table{font-size:.78rem}.footer{padding:32px 24px}.footer-inner{flex-direction:column;gap:8px;text-align:center}}
   @media print{.site-header,.progress-bar{display:none}body{background:#fff}}
 </style>
@@ -123,7 +125,7 @@
 <body>
 <header class="site-header">
   <img src="https://irundo.com/wp-content/themes/irundo/assets/logo.svg" alt="Irundo" class="site-header-logo">
-  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-indicator">Dan 2 od 7</span></nav>
+  <nav class="site-header-nav"><a href="index.html">← Priručnik</a><span class="day-switcher"><select onchange="if(this.value)window.location=this.value"><option value="">Idi na dan...</option><option value="index.html">Index</option><option value="Irundo_HC_Prirucnik_Dan1.html">Dan 1: Uvod i alati</option><option value="Irundo_HC_Prirucnik_Dan2.html" selected>Dan 2: Svakodnevni workflow</option><option value="Irundo_HC_Prirucnik_Dan3.html">Dan 3: Hospitality procedure</option><option value="Irundo_HC_Prirucnik_Dan4.html">Dan 4: Housekeeping <span class="day-indicator">Dan 2 od 7</span> Facility</option><option value="Irundo_HC_Prirucnik_Dan5.html">Dan 5: Villas <span class="day-indicator">Dan 2 od 7</span> Arena</option><option value="Irundo_HC_Prirucnik_Dan6.html">Dan 6: Praksa + Računi</option><option value="Irundo_HC_Prirucnik_Dan7.html">Dan 7: Evaluacija</option></select></span><span class="day-indicator">Dan 2 od 7</span></nav>
 </header>
 <div class="hero-image"></div>
 <section class="hero"><div class="hero-inner">
@@ -367,6 +369,84 @@
     </div>
   </div>
 
+  <!-- PRIORITIES -->
+  <div class="section">
+    <div class="section-label">Prioriteti</div>
+    <h3>🎯 Najbitnije stvari u danu — ne fulaj ovo!</h3>
+    <p>Dnevni workflow ima puno zadataka, ali ovo su apsolutni prioriteti. Ako sve drugo kasni, ovo <strong>ne smije</strong> kasniti:</p>
+
+    <div class="priority-card">
+      <h4>⚡ Top prioriteti — svaki dan bez iznimke</h4>
+      <ol>
+        <li><strong>Provjeri kodove</strong> — svaki gost MORA dobiti točan kod. Krivi kod = gost stoji pred vratima</li>
+        <li><strong>Pošalji kodove SVIMA</strong> — prođi listu dolazaka i provjeri da nitko nije preskočen</li>
+        <li><strong>Provjeri sve kodove prije kraja smjene</strong> — zadnja provjera da su svi gosti koji dolaze danas dobili sve</li>
+        <li><strong>Kasni dolasci / neodgovoreni gosti</strong> — javi im se proaktivno: radimo 9–21h, sve smo provjerili, upute su na linku</li>
+        <li><strong>Pošalji rasporede čišćenja</strong></li>
+      </ol>
+    </div>
+
+    <div class="tip-box"><p><strong>💡 Klik na self link!</strong> Prije nego pošalješ self poruku gostu, <strong>klikni na link u poruci</strong> i pogledaj što gost zapravo dobije. Tako možeš provjeriti je li sve točno — adresa, kodovi, parking info, kućni red. Ovo je najbrži način da uhvatiš grešku.</p></div>
+
+    <div class="info-box"><p><strong>ℹ️ Sve ostalo je bitno</strong> — računi, Arena, reminder poruke, eVisitor — ali može kasniti 15-30 min ako treba. Kodovi i čišćenje <strong>ne mogu čekati</strong>.</p></div>
+  </div>
+
+  <!-- MESSAGE EXAMPLES -->
+  <div class="section">
+    <div class="section-label">Primjeri poruka</div>
+    <h3>💬 Kako izgledaju poruke koje šaljemo</h3>
+    <p>Evo pravih primjera tri ključne poruke — reminder, check-out i self kodovi. Obrati pažnju na ton, strukturu i informacije koje uključujemo.</p>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8f4fd;color:#2980b9;">📩</span> Reminder poruka (dan prije dolaska)</h4>
+      <p>Šalje se dan prije dolaska. Podsjeća gosta na CI, traži ETA i šalje registracijski link.</p>
+      <div class="msg-example"><span class="msg-label msg-label-reminder">Reminder</span>
+Hi Tiffany,
+Your stay at ZG1 (4+2) is just around the corner! Please note the following:
+- If you haven't, please <b>complete the registration form</b> in order to receive codes on time: https://ci.book.rentl.io/...
+- Detailed check-in instructions, apartment and destination info can be found at the link in the email sent you
+- Your check-in code will be sent via WhatsApp <b>tomorrow at 3:00 PM</b>
+
+<b>Arrival time:</b>
+We kindly ask you to inform us about your estimated arrival time
+- While early check-in isn't guaranteed, we'll keep you updated if available sooner.
+
+Have questions? Feel free to reach out!
+Best,
+Matea</div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#fff3e8;color:#e67e22;">📤</span> Check-out poruka (dan prije odlaska)</h4>
+      <p>Šalje se dan prije odlaska. Podsjeća na CO vrijeme, ključ, traži feedback i nudi R1.</p>
+      <div class="msg-example"><span class="msg-label msg-label-co">Check-out</span>
+Pozdrav Drzaic!
+Šaljemo samo kratki podsjetnik da je check out <b>sutra do 10 h</b>. Ako odlazite ranije, javite nam. Molimo vas da <b>ključ vratite u keybox</b>, šifra je ista.
+
+Također, cijenili bismo vašu povratnu informaciju.
+Molimo vas da nas obavijestite prije dana odlaska <b>ako vam je potreban R1 račun</b>, jer promjene računa nakon izdavanja nisu moguće.
+
+PS: Rezervirajte direktno na www.irundo.com i ostvarite 5% popusta. Hvala</div>
+    </div>
+
+    <div class="card">
+      <h4><span class="icon" style="background:#e8fde8;color:#27ae60;">🔑</span> Self poruka — kodovi za ulazak</h4>
+      <p>Šalje se u 15:00 na dan dolaska. Sadrži link na upute i kod za ulazak.</p>
+      <div class="msg-example"><span class="msg-label msg-label-self">Self kod</span>
+Pozdrav Drzaic,
+Upute za <b>samostalnu prijavu, upute o korištenju apartmana, parking informacije i naše preporuke</b> potražite na linku:
+https://bit.ly/CheckininstructionsZS7
+
+<b>Naziv APARTMANA:</b> ZS7 (2+2)
+<b>KEYBOX kod je:</b> 5771
+
+Javite nam kad se smjestite i je li sve u redu! Želimo Vam ugodan boravak.
+Lijepi pozdrav,
+Matea</div>
+      <div class="warning-box"><p><strong>⚠️ Prije slanja:</strong> Klikni na self link (https://bit.ly/...) i provjeri da se otvara ispravna stranica s točnom adresom, kodovima i svim informacijama. Ovo je ono što gost vidi!</p></div>
+    </div>
+  </div>
+
   <!-- CHECKLIST -->
   <div class="section">
     <div class="checklist"><h4>✅ Checklista za Dan 2</h4><p style="color:var(--text-sec);font-size:.84rem;margin-bottom:14px;">Na kraju dana mentor provjerava:</p>
@@ -385,7 +465,7 @@
     </div>
   </div>
 
-  <div class="tip-box" style="text-align:center;margin-top:36px;"><p><strong>🎯 Sutra te čeka Dan 3:</strong> Hospitality procedure — žalbe gostiju, kvarovi, situacije s rezervacijama, direktne rezervacije i recenzije.</p></div>
+  <div class="day-nav"><a href="Irundo_HC_Prirucnik_Dan1.html">← Dan 1</a><div class="spacer"></div><a href="Irundo_HC_Prirucnik_Dan3.html">Dan 3 →</a></div>
 </main>
 
 <footer class="footer"><div class="footer-inner"><div><div class="footer-logo">Irundo</div><p>Edukacijski priručnik za HC koordinatora · Dan 2 od 7</p></div><span class="footer-tagline">Be adventurous. Feel at home. 🐦</span></div></footer>
